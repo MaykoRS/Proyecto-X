@@ -1,5 +1,7 @@
 package GUI;
 
+import javax.swing.JOptionPane;
+
 import Personajes.Bomberman;
 
 /**
@@ -36,7 +38,7 @@ public class BombermanThread extends Thread {
 			} 
 			if(this.bomberman.getPosicion().contactoConEnemigo(bomberman)){
 				this.destruir();
-				System.out.println("Bomberman ha sido afectado - Game Over");
+				JOptionPane.showMessageDialog(null, "BOMBERMAN HA SIDO AFECTADO - GAME OVER");
 			}
 		}
 	}
