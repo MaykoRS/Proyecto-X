@@ -37,8 +37,8 @@ public class BombermanThread extends Thread {
 				gui.toggleLock();
 			} 
 			if(this.bomberman.getPosicion().contactoConEnemigo(bomberman)){
+				JOptionPane.showMessageDialog(null,"Bomberman ha sido afectado - GAME OVER");
 				this.destruir();
-				JOptionPane.showMessageDialog(null, "BOMBERMAN HA SIDO AFECTADO - GAME OVER");
 			}
 		}
 	}
