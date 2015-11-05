@@ -5,9 +5,11 @@ import javax.swing.JOptionPane;
 import Personajes.Bomberman;
 
 /**
+ * Clase correspondiente a la implementación del hilo del Personaje Bomberman.
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
  * @author Escudero Johanna Valeria, Alumna de Universidad Nacional del Sur, LU 105868
  * @author Reyes Gastón Federico, Alumno de Universidad Nacional del Sur, LU: 106878
+ *  
  */
 public class BombermanThread extends Thread {
 

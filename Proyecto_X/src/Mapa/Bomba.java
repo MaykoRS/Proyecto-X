@@ -6,10 +6,11 @@ import El_Juego.Tiempo;
 import Grafica.BombaGrafica;
 
 /**
- * Clase correspondiente a la Implementacion del módulo Juego
+ * Clase correspondiente a la Implementacion del módulo Bomba. 
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
  * @author Escudero Johanna Valeria, Alumna de Universidad Nacional del Sur, LU 105868
  * @author Reyes Gastón Federico, Alumno de Universidad Nacional del Sur, LU: 106878
+ * 
  */
 public class Bomba {
 	

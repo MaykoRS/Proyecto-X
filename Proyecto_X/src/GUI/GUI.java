@@ -12,10 +12,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 /**
- * Clase correspondiente a la Implementacion del módulo Juego
+ * Clase correspondiente a la Implementacion del módulo GUI.
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
  * @author Escudero Johanna Valeria, Alumna de Universidad Nacional del Sur, LU 105868
  * @author Reyes Gastón Federico, Alumno de Universidad Nacional del Sur, LU: 106878
+ * 
  */
 public class GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
