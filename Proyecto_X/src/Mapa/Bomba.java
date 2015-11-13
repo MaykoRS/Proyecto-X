@@ -2,8 +2,10 @@ package Mapa;
 
 import javax.swing.JLabel;
 
+import El_Juego.ContadorBomba;
 import El_Juego.Tiempo;
 import Grafica.BombaGrafica;
+import Personajes.Bomberman;
 
 /**
  * Clase correspondiente a la Implementacion del módulo Bomba. 
@@ -19,6 +21,7 @@ public class Bomba {
     protected boolean estadoActiva;
     protected Celda posicion;
     protected Tiempo tiempoTirada;
+    protected Bomberman bomberman;
     protected BombaGrafica grafico;
     
     
@@ -61,12 +64,7 @@ public class Bomba {
      *  Espera el tiempo para que la bomba explote.
      */
     public void esperarParaExplotar(){
-//        for(int i=0; i<4; i++){
-//        	if(i == 3){
-//        		explotar();
-//        	}
-//        	delaySegundo();
-//        }
+    	new ContadorBomba(bomberman,3000).start();
     }
 
 //    private void delaySegundo(){

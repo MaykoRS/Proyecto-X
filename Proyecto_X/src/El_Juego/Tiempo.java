@@ -7,7 +7,7 @@ package El_Juego;
  * @author Reyes Gastón Federico, Alumno de Universidad Nacional del Sur, LU: 106878
  *
  */
-public class Tiempo {
+public class Tiempo extends Thread{
     protected int horas;
     protected int minutos;
     protected int segundos;
@@ -16,16 +16,26 @@ public class Tiempo {
         this.horas = 0;
         this.minutos = 0;
         this.segundos = 0;
-        for(int i= 0; i < 999; i++ ){
-        	for(int j= 0; j < 20; j++){
-        		for(int k = 0; k < 20; k ++){
-        			this.horas = i;
-        			this.minutos = j;
-        			this.segundos = k;
-        			delaySegundo();
-        		}
-        	}
-        }
+       
+    }
+    
+    public void run(){
+    	while(true){
+    		try {
+    			Thread.sleep(1000);
+    			calcularTiempo();
+    			System.out.println(horas + ":" + minutos+ ":" + segundos );
+    		} catch (InterruptedException e) {
+    		}
+    	}
+    }
+    
+    public void calcularTiempo(){
+    	segundos++;
+    	if(segundos==60){
+    		segundos=0;
+    		minutos++;
+    	}
     }
 
     /**
