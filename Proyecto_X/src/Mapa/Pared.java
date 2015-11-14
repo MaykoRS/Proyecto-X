@@ -40,9 +40,9 @@ public abstract class Pared {
 	}
 	
 	
-	public abstract void recibirBomberman(Bomberman b, int dir);
+	protected abstract void recibirBomberman(Bomberman b, int dir);
 	
-	public abstract void recibirEnemigo(Enemigo e, int dir);
+	protected abstract void recibirEnemigo(Enemigo e, int dir);
 	
 	/**
 	 * Devuelve el JLabel de la pared.
