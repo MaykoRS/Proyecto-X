@@ -47,12 +47,6 @@ public class Tiempo extends Thread{
         return false;
     }
     
-    private void delaySegundo(){
-    	try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-		}
-    }
     
     /**
      * @param T 

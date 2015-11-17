@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import El_Juego.ContadorBomba;
 import El_Juego.Juego;
 
 import java.awt.event.KeyAdapter;
@@ -25,6 +26,7 @@ public class GUI extends JFrame {
 	
 	private Juego j;
 	private BombermanThread tiempo;
+	private ContadorBomba cb;
 	
 	private volatile boolean lock = false;
 	private int direction = -1;
@@ -67,6 +69,8 @@ public class GUI extends JFrame {
 		j = new Juego(this);
 		tiempo = new BombermanThread(j.getBomberman(), this);
 		tiempo.start();
+		cb = new ContadorBomba(j.getBomberman(), 3000);
+		//cb.start();
 		j.empezar();
 	}
 	

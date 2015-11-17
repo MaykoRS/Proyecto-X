@@ -117,6 +117,7 @@ public class Bomberman extends Personaje{
 			MiBomba = new Bomba(alcanceBomba,this.posicion,this.Mijuego.getTiempoActual());
 			getPosicion().agregarBomba(MiBomba);
 			//this.Mijuego.getGUI().add(MiBomba.getGrafico());
+			System.out.println("SOLTAR BOMBA");
 			MiBomba.esperarParaExplotar();
 		}
 		return MiBomba;
