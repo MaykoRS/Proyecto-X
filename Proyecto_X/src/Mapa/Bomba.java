@@ -72,18 +72,10 @@ public class Bomba {
      *  Espera el tiempo para que la bomba explote.
      */
     public void esperarParaExplotar(){
-    	System.out.println("ESPERAR PARA EXPLOTAR");
     	ContadorBomba cb = new ContadorBomba(this.bomberman,this,3000);
 		cb.start();
     	//new ContadorBomba(bomberman,0).start();
     }
-
-//    private void delaySegundo(){
-//    	try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e) {
-//		}
-//    }
     
     /**
      * Devuelve la posición de la bomba.

@@ -15,7 +15,7 @@ import Mapa.Celda;
 public class Bomberman extends Personaje{
 
 	private int MaxBomba;
-	private int alcanceBomba = 3;
+	private int alcanceBomba = 1;
 	private Juego Mijuego;
 	private Bomba MiBomba;
 	
