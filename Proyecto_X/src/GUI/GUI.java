@@ -69,7 +69,7 @@ public class GUI extends JFrame {
 		j = new Juego(this);
 		tiempo = new BombermanThread(j.getBomberman(), this);
 		tiempo.start();
-		cb = new ContadorBomba(j.getBomberman(), 3000);
+		//cb = new ContadorBomba(j.getBomberman(), 3000);
 		//cb.start();
 		j.empezar();
 	}

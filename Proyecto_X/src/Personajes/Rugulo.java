@@ -29,8 +29,8 @@ public class Rugulo extends Enemigo {
 
 	@Override
 	public void morir() {
-		// TODO Auto-generated method stub
-		
+		vive = false;
+		getGrafico().setIcon(null);
 	}
 
 }

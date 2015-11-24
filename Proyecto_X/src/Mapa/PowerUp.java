@@ -3,7 +3,8 @@ package Mapa;
 import Personajes.Bomberman;
 
 public abstract class PowerUp{
-   
+	
+	protected int cantidad;
 	protected boolean activa;
 
     public PowerUp(){
@@ -14,7 +15,7 @@ public abstract class PowerUp{
     public void setActiva(boolean a){
        this.activa=a;
     }
-
+    
     public boolean getActiva(){
         return this.activa;
     }

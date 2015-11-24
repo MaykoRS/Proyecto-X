@@ -15,8 +15,10 @@ public class EnemigoThread extends Thread{
 	private static int velocidadEstandar = 1500;
 	private int velocidad;
 	private volatile boolean eDetener;
+	private GUI gui;
 	
 	public EnemigoThread(Enemigo e, GUI gui){
+		this.gui = gui;
 		this.enemigo = e;
 		this.eDetener = false;
 		this.velocidad = e.getVelocidad();
@@ -30,7 +32,12 @@ public class EnemigoThread extends Thread{
 				Thread.sleep(this.velocidadEstandar / velocidad);
 				
 				// Realizo el movimiento
-				this.enemigo.mover();
+				if(this.enemigo.getVive())
+					this.enemigo.mover();
+				else{
+					//enemigo.getGrafico().setIcon(null);
+					eDetener=true;
+				}
 			} catch (InterruptedException e) { }
 		}
 	}

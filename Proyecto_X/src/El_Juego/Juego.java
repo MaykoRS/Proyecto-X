@@ -27,7 +27,6 @@ public class Juego {
 	protected Bomberman MiBomberman;
 	protected Tiempo MarcadorTiempo;
 	protected GUI MiGui;
-	
 	protected Mapa MiMapa;
 	
 	public Juego(GUI gui){
@@ -41,6 +40,7 @@ public class Juego {
 		insertarParedes(MiGui);
 		insertarEnemigos(MiGui);
 		
+		MarcadorTiempo = new Tiempo();
 	}
 	
 	/**
@@ -173,7 +173,7 @@ public class Juego {
 	 * @return Tiempo a retornar.
 	 */
 	public Tiempo getTiempoActual() {
-		return this.MarcadorTiempo = new Tiempo();
+		return this.MarcadorTiempo;
 	}
 
 	/**

@@ -40,6 +40,14 @@ public class Bomba {
     	this.grafico = new BombaGrafica(this.posicion.getX(), this.posicion.getY());
 	}
 	
+	public Bomba(int aB, Celda pos, Bomberman b) {
+		this.bomberman = b;
+		this.estadoActiva = true;
+    	this.posicion = pos;
+    	this.nivelDeImpacto = aB;
+    	this.grafico = new BombaGrafica(this.posicion.getX(), this.posicion.getY());
+	}
+
 	public void explotar(){
         this.grafico.explotar();
     }
@@ -64,7 +72,10 @@ public class Bomba {
      *  Espera el tiempo para que la bomba explote.
      */
     public void esperarParaExplotar(){
-    	new ContadorBomba(bomberman,3000).start();
+    	System.out.println("ESPERAR PARA EXPLOTAR");
+    	ContadorBomba cb = new ContadorBomba(this.bomberman,this,3000);
+		cb.start();
+    	//new ContadorBomba(bomberman,0).start();
     }
 
 //    private void delaySegundo(){
@@ -96,7 +107,7 @@ public class Bomba {
      * @param p La p
      */
     public void setPosicion(Celda p){
-        posicion=p;
+        posicion = p;
     }
 
     /**

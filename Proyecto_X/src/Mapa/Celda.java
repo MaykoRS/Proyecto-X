@@ -3,6 +3,9 @@ package Mapa;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
+import Grafica.PDestruibleGrafica;
 import Personajes.*;
 
 /**
@@ -130,7 +133,7 @@ public class Celda {
 	 * Elimina Pared.
 	 * @param p Pared a eliminar.
 	 */
-	public void removePared(Pared p){
+	public void removePared(){
 		this.MiPared = null;
 	}
 	
@@ -189,6 +192,14 @@ public class Celda {
 
 	public ArrayList<Enemigo> getEnemigos() {
 		return MisEnemigos;
+	}
+
+	public Pared getPared() {
+		return this.MiPared;
+	}
+
+	public Bomba getBomba() {
+		return this.MiBomba;
 	}
 	
 }

@@ -2,6 +2,8 @@ package GUI;
 
 import javax.swing.JOptionPane;
 
+import El_Juego.ContadorBomba;
+import Mapa.Bomba;
 import Personajes.Bomberman;
 
 /**
@@ -34,9 +36,24 @@ public class BombermanThread extends Thread {
 				e.printStackTrace();
 			} 
 			
+			if(!bomberman.getVive())
+				detener();
+			
 			if(gui.getLock()){
-				this.bomberman.mover(gui.getDirection());
-				gui.toggleLock();
+				if(direccionValida()){
+					this.bomberman.mover(gui.getDirection());
+					gui.toggleLock();
+				}else{
+					Bomba actual = this.bomberman.soltarBomba(gui.getDirection());
+					this.bomberman.getPosicion().agregarBomba(actual);
+					//System.out.println(actual);
+					if(actual!=null){
+						gui.add(actual.getGrafico());
+						actual.esperarParaExplotar();
+					}
+					gui.toggleLock();
+				}
+				
 			} 
 			if(this.bomberman.getPosicion().contactoConEnemigo(bomberman)){
 				JOptionPane.showMessageDialog(null,"Bomberman ha sido afectado - GAME OVER");
@@ -65,5 +82,9 @@ public class BombermanThread extends Thread {
 		
 		// Notificamos a la logica que este hilo se destruyo.
 		this.bomberman.morir();
+	}
+	
+	private boolean direccionValida(){
+		return gui.getDirection() >= 37 && gui.getDirection() <= 40;
 	}
 }

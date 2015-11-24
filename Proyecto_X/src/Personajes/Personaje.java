@@ -29,6 +29,7 @@ public abstract class Personaje {
 		this.velocidad = velocidad;	
 		this.grafico = null;
 		this.modoDios = false;
+		this.vive=true;
 	}
 	
 	/**

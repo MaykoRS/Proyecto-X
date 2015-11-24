@@ -15,7 +15,7 @@ import Mapa.Celda;
 public class Bomberman extends Personaje{
 
 	private int MaxBomba;
-	private int alcanceBomba = 1;
+	private int alcanceBomba = 3;
 	private Juego Mijuego;
 	private Bomba MiBomba;
 	
@@ -88,7 +88,8 @@ public class Bomberman extends Personaje{
 	
 	@Override
 	public void morir() {
-		this.grafico.morir();	
+		this.grafico.morir();
+		vive=false;
 	}
 	
 	/* (non-Javadoc)
@@ -113,14 +114,12 @@ public class Bomberman extends Personaje{
 	 * @return Bomba a soltar.
 	 */
 	public Bomba soltarBomba(int dir) {
+		Bomba nueva = null ;
 		if(dir == KeyEvent.VK_SPACE){
-			MiBomba = new Bomba(alcanceBomba,this.posicion,this.Mijuego.getTiempoActual());
-			getPosicion().agregarBomba(MiBomba);
-			//this.Mijuego.getGUI().add(MiBomba.getGrafico());
-			System.out.println("SOLTAR BOMBA");
-			MiBomba.esperarParaExplotar();
+			nueva = new Bomba(alcanceBomba,this.posicion,this);
+			posicion.agregarBomba(MiBomba);
 		}
-		return MiBomba;
+		return nueva;
    	}
 	
 	/**
