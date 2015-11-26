@@ -18,6 +18,7 @@ public class Bomberman extends Personaje{
 	private int alcanceBomba = 1;
 	private Juego Mijuego;
 	private Bomba MiBomba;
+	private boolean tirarBomba;
 	
 	/**
 	 * Crea constructor con 2 parámetros.
@@ -27,8 +28,9 @@ public class Bomberman extends Personaje{
 	public Bomberman(int velocidad, Celda pos) {
 		super(velocidad,pos);
 		this.grafico = new BombermanGrafica(this.velocidad, this.posicion.getX(), this.posicion.getY());
-		this.modoDios = true;// PUSE ESTO PARA HACER LA PRUEBA DE MODO DIOS, EN EL JUEGO NO DEBE ESTAR ESTA SENTENCIA
-	}						// PORQUE YA ESTA SETEADO EN LA  CLASE PERSONAJE COMO "FALSE" Y POR ENDE LO HEREDA.
+		this.modoDios = false;
+		tirarBomba=true;
+	}					
 	
 	/**
 	 * Crea consctructor con un parámetro.
@@ -40,7 +42,10 @@ public class Bomberman extends Personaje{
 		this.grafico = new BombermanGrafica(this.velocidad, this.posicion.getX(), this.posicion.getY());
 	}
 
-	@Override
+
+    /**
+     * Metodo encargado de mover el Bomberman
+     */
 	public void mover(int dir){
 		Celda destino =  this.posicion.getVecina(dir);
 		if(destino != null)
@@ -72,7 +77,10 @@ public class Bomberman extends Personaje{
 		this.posicion.setBomberman(this);
 	}
 	
-	@Override
+	/**
+	 * Consulta que retorna el valor de verdad del atributo modoDios
+	 * @return modoDios
+	 */
 	public boolean soyDios() {
 		return this.modoDios;
 	}
@@ -86,17 +94,21 @@ public class Bomberman extends Personaje{
 	}
 	
 	
-	@Override
+	/**
+	 * Método encargado de la muerte del Bomberman
+	 */
 	public void morir() {
 		this.grafico.morir();
 		vive=false;
 	}
 	
-	/* (non-Javadoc)
-	 * @see Personajes.Personaje#getVelocidad()
+	/**
+	 * Consulta que retorna el valor del atributo velocidad
+	 * @return velocidad
 	 */
-	public int getVelocidad(){
-		return this.velocidad;
+	public int getVelocidad()
+	{
+		return velocidad;
 	}
 	
 
@@ -115,9 +127,14 @@ public class Bomberman extends Personaje{
 	 */
 	public Bomba soltarBomba(int dir) {
 		Bomba nueva = null ;
-		if(dir == KeyEvent.VK_SPACE){
-			nueva = new Bomba(alcanceBomba,this.posicion,this);
-			posicion.agregarBomba(MiBomba);
+		if(dir == KeyEvent.VK_SPACE)
+		{
+			if (tirarBomba)
+			{
+				nueva = new Bomba(alcanceBomba,this.posicion,this);
+			    posicion.agregarBomba(MiBomba);
+			    tirarBomba=false;
+		    }
 		}
 		return nueva;
    	}
@@ -155,19 +172,21 @@ public class Bomberman extends Personaje{
        	return mate;
   	 }
 	
-	/**
+	/**Devuelve el valor de verdad de si es posible o no tirar otra bomba
 	 * 
-	 * @return
+	 * @return 
 	 */
-	public boolean puedoTirarOtraBomba(){
-		return true;// modificar
+	public boolean puedoTirarOtraBomba()
+	{
+		return tirarBomba;
 	}
 	 
 	/**
 	 * Devuelve el alcance de la bomba.
 	 * @return Alcance de la bomba.
 	 */
-	public int getAlcanceBomba(){
+	public int getAlcanceBomba()
+	{
 		return this.alcanceBomba;
 	}
 	
@@ -177,6 +196,11 @@ public class Bomberman extends Personaje{
 	 */
 	public void setAlcanceBomba(int a){
 		 alcanceBomba = a;
+	}
+
+	public void setTirarBomba(boolean b) 
+	{
+		tirarBomba=b;
 	}
 	
 }

@@ -17,7 +17,7 @@ public class BombaGrafica {
 
 	protected final int width = 32;
 	protected final int height = 32;
-	
+	protected boolean exploto;
 	protected JLabel grafico;
 	protected Icon [] image;
 	
@@ -25,16 +25,19 @@ public class BombaGrafica {
 	
 	public BombaGrafica(int x, int y){
 		pos = new Point(x * width, y * height);
+		exploto= false;
 		this.image = new Icon[2];
 		this.image[0] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomba.png"));
 		this.image[1] = new ImageIcon(this.getClass().getResource("/Bomberman/Explosion.png"));
+	    
 	}
 	
 	/**
 	 * Devuelve la posicion de la bomba.
 	 * @return Posicion a devolver.
 	 */
-	public Point getPos(){
+	public Point getPos()
+	{
 		return pos;
 	}
 	
@@ -42,15 +45,26 @@ public class BombaGrafica {
 	 * Devuelve el JLabel cuando explota la bomba.
 	 * @return JLabel a devolver.
 	 */
-	public JLabel explotar(){
+	public JLabel explotar()
+	{
 		if(this.grafico != null){
 			this.grafico.setIcon(image[1]);
 			this.grafico.setBounds(this.pos.x, this.pos.y, width, height);
+		    exploto=true;  
+		
 		}
+	
 		return this.grafico;
+	 
 	}
 	
 	
+		
+	
+	public boolean getExploto()
+	{
+		return exploto;
+	}
 	/** Devuelve el JLabel de Bomba.
 	 * @return JLabel a retornar.
 	 */

@@ -17,10 +17,12 @@ public class ParedDestruible extends Pared {
 		this.grafico = new PDestruibleGrafica(this.posicion.getX(), this.posicion.getY());
 	}
 
-	@Override
-	public void destruir() {
-		// TODO Auto-generated method stub
-		
+	
+	//Deberia retornar un entero que representa la cantidad de putnso
+	public void destruir() 
+	{
+		grafico.destruir();
+		 
 	}
 
 

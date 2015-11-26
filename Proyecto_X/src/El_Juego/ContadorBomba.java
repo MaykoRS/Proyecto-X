@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import GUI.GUI;
+import Grafica.CeldaGrafica;
 import Mapa.Bomba;
 import Mapa.Celda;
 import Mapa.Pared;
@@ -63,14 +64,15 @@ public class ContadorBomba extends Thread {
 					Celda celdaActual = bomba.getPosicion();
 					boolean sigo = true;
 					for(int p = 0; p<bomberman.getAlcanceBomba() && sigo; p++){
-						celdaActual=celdaActual.getVecina(dir);
+						celdaActual = celdaActual.getVecina(dir);
 						if(celdaActual!= null){
 							JLabel lblCel = afectaCelda(celdaActual);
 							if(lblCel!=null){
 								lblCel.setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/Explosion.png")));
 								listCeldas.add(lblCel);
-							}else if(esIndestructible(celdaActual.getPared()))
-								sigo = false;
+							}else 
+								if(esIndestructible(celdaActual.getPared()))
+									sigo = false;
 						}else{
 							sigo=false;
 						}
@@ -81,7 +83,8 @@ public class ContadorBomba extends Thread {
 				bomba.getGrafico().setIcon(null);
 				for(JLabel l: listCeldas){//mostrar powerups!!
 					if(l!=null)
-						l.setIcon(null);
+						l.setIcon(bomba.getPosicion().getGrafico().getIcon());
+
 				}
 				//System.out.println("EXPLOTE");
 			} catch (InterruptedException e) {
@@ -95,12 +98,25 @@ public class ContadorBomba extends Thread {
 	
 	private JLabel afectaCelda(Celda celdaActual){
 		JLabel salida = null;
+		
+			if(!celdaActual.hayPared()){
+				salida = celdaActual.getGrafico().getGrafico();
+			}
+			
 			if(esDestruible(celdaActual.getPared())){
 				salida=celdaActual.getPared().getGrafico();
 				celdaActual.removePared();
 			}
 			
 			if(celdaActual.hayEnemigo()){
+//				int index=0;
+//				while(!celdaActual.getEnemigos().isEmpty() && index <= 6){
+//					Enemigo ene = celdaActual.getEnemigos().get(index);
+//					salida = ene.getGrafico();
+//					ene.morir();
+//					celdaActual.removeEnemigo(ene);
+//					index++;
+//				}
 				for(int i=0; i<celdaActual.getEnemigos().size(); i++){
 					Enemigo ene = celdaActual.getEnemigos().get(i);
 					salida = ene.getGrafico();
@@ -113,6 +129,8 @@ public class ContadorBomba extends Thread {
 				salida = celdaActual.getBomberman().getGrafico();
 				JOptionPane.showMessageDialog(null, "GAME OVER");
 			}
+			
+			
 			//celdaActual.remove
 		return salida;
 	}

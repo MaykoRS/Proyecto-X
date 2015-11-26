@@ -1,5 +1,6 @@
 package GUI;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import El_Juego.ContadorBomba;
@@ -49,6 +50,7 @@ public class BombermanThread extends Thread {
 					//System.out.println(actual);
 					if(actual!=null){
 						gui.add(actual.getGrafico());
+//						bomberman.getPosicion().getGrafico().getGrafico().setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/Bomba.png")));
 						actual.esperarParaExplotar();
 					}
 					gui.toggleLock();

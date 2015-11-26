@@ -1,4 +1,4 @@
-package GUI;
+ package GUI;
 
 import java.awt.EventQueue;
 
@@ -51,23 +51,29 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
+		super("Bomberman");
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				mover(arg0);
 			}
 		});
-		getContentPane().setLayout(null);
+		
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1008, 450);
-		contentPane = new JPanel();
+		setSize(1010,450);
+		contentPane= new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
 		
 		j = new Juego(this);
+		
 		tiempo = new BombermanThread(j.getBomberman(), this);
+		
 		tiempo.start();
 		//cb = new ContadorBomba(j.getBomberman(), 3000);
 		//cb.start();
@@ -88,6 +94,7 @@ public class GUI extends JFrame {
 	public void toggleLock(){
 		this.lock = !this.lock;
 	}
+	
 	
 	public int getDirection(){
 		return this.direction;

@@ -1,20 +1,23 @@
 package Mapa;
 
+
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import Grafica.BombaGrafica;
+import Grafica.CeldaGrafica;
 import Grafica.PDestruibleGrafica;
 import Personajes.*;
 
 /**
- * @author El Vaquero
- *
- */
-/**
- * @author El Vaquero
- *
+ * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
+ * @author Escudero Johanna Valeria, Alumna de Universidad Nacional del Sur, LU 105868
+ * @author Reyes Gastón Federico, Alumno de Universidad Nacional del Sur, LU: 106878
  */
 public class Celda {
 	public static final int LEFT = KeyEvent.VK_LEFT;
@@ -29,28 +32,39 @@ public class Celda {
 	protected Pared MiPared;
 	protected PowerUp MiPowerUp;
 	protected Bomba MiBomba;
+	protected CeldaGrafica grafico;
+	protected int x,y;
 	
-	protected int x;
-	protected int y;
-	
-	public Celda(Mapa map, int x, int y){
-		this.x = x;
-		this.y = y;
+	public Celda(Mapa map, int x, int y)
+	{
+		this.x=x;
+		this.y=y;
 		this.MiMapa = map;
 		MiBomberman = null;
 		MisEnemigos = new ArrayList<Enemigo>();
+	    grafico= new CeldaGrafica(x,y);
+	   
 	}
 	
-	public void agregarBomba(Bomba b){
+	public void agregarCeldaTransitable(CeldaGrafica ct){
+		this.grafico = ct;
+	}
+	
+	
+	public void agregarBomba(Bomba b)
+	{
 		this.MiBomba = b;
+		
+		
 	}
 	/**
 	 * Devuelve true y sòlo si hay pared.
 	 * @return True y sòlo si hay pared.
 	 */
 	public boolean hayPared(){
-		return this.MiPared != null;
+		return  MiPared != null;
 	}
+	
 	
 	/**
 	 * Devuelve true si y sòlo si hay PowerUp.
@@ -133,8 +147,9 @@ public class Celda {
 	 * Elimina Pared.
 	 * @param p Pared a eliminar.
 	 */
-	public void removePared(){
+	public void removePared() {
 		this.MiPared = null;
+	     
 	}
 	
 	/**
@@ -201,5 +216,11 @@ public class Celda {
 	public Bomba getBomba() {
 		return this.MiBomba;
 	}
+	
+	
+	public CeldaGrafica getGrafico() {
+		return grafico;
+	}
+
 	
 }

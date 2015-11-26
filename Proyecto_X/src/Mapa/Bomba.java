@@ -48,9 +48,12 @@ public class Bomba {
     	this.grafico = new BombaGrafica(this.posicion.getX(), this.posicion.getY());
 	}
 
-	public void explotar(){
+	public void explotar()
+	{
         this.grafico.explotar();
-    }
+        bomberman.setTirarBomba(true);
+       
+	}
 
     /**
      * Incrementa el nivel del impacto.
@@ -71,7 +74,8 @@ public class Bomba {
     /**
      *  Espera el tiempo para que la bomba explote.
      */
-    public void esperarParaExplotar(){
+    public void esperarParaExplotar()
+    {   
     	ContadorBomba cb = new ContadorBomba(this.bomberman,this,3000);
 		cb.start();
     	//new ContadorBomba(bomberman,0).start();

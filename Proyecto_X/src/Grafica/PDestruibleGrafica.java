@@ -16,6 +16,14 @@ public class PDestruibleGrafica extends ParedGrafica {
 		super(x, y);
 		
 		this.image = new ImageIcon(this.getClass().getResource("/Bomberman/PDestruible.png"));
+	
+	
 	}
 
+	
+	public void destruir() 
+	{
+		this.image= new ImageIcon(this.getClass().getResource("/Bomberman/celdaTransitable.png"));
+	   
+	}
 }

@@ -1,9 +1,10 @@
 package El_Juego;
 
 import java.util.Random;
+
+import javax.swing.JLabel;
+
 import GUI.GUI;
-import Mapa.Celda;
-import Mapa.Mapa;
 import Mapa.*;
 import Personajes.*;
 import GUI.EnemigoThread;
@@ -36,11 +37,29 @@ public class Juego {
 		Celda c = this.MiMapa.getCelda(1,1);
 		MiBomberman = new Bomberman(1,c);
 		this.MiGui.add(MiBomberman.getGrafico());
-	
+        
+		insertarCeldasTransitables(MiGui);
 		insertarParedes(MiGui);
 		insertarEnemigos(MiGui);
 		
 		MarcadorTiempo = new Tiempo();
+	}
+	
+	
+	/**
+	 * Inserto en el mapa todas las celdas transitables.
+	 * @param g GUI a añadir.
+	 */
+	private void insertarCeldasTransitables(GUI g) {
+		Celda cel;
+		
+		for(int f=0; f<HEIGHT; f++){
+			for(int c=0; c <WIDTH; c++) {
+				cel= MiMapa.getCelda(f,c);
+				cel.agregarCeldaTransitable(cel.getGrafico());
+				g.add(cel.getGrafico().getGrafico(),-1);	
+			}
+		}
 	}
 	
 	/**
@@ -57,8 +76,8 @@ public class Juego {
 					cel = this.MiMapa.getCelda(f,c);
 					p = new ParedIndestructible(cel);
 					cel.agregarPared(p);
-					g.add(p.getGrafico());
-				}	
+					g.add(p.getGrafico(),0);
+				}			
 			}
 		}
 		
@@ -75,7 +94,7 @@ public class Juego {
 				if(!cel.hayPared() && !lugarReservado(ancho,altura) ){
 					p = new ParedDestruible(cel);
 					cel.agregarPared(p);
-					g.add(p.getGrafico());
+					g.add(p.getGrafico(),1);
 					contador++;
 				}
 			} catch (Exception e) {
@@ -104,12 +123,12 @@ public class Juego {
 					if(i < 3){
 						e = new Rugulo(1,cel);
 						cel.agregarEnemigo(e); 
-						g.add(e.getGrafico());
+						g.add(e.getGrafico(),2);
 					}
 					else{ 
 						e = new Altair(1,cel);
 						cel.agregarEnemigo(e);
-						g.add(e.getGrafico());
+						g.add(e.getGrafico(),2);
 					}
 					MisEnemigos[i] = e;
 					EnemigoHilo[i] = new EnemigoThread(e,g); 
@@ -123,7 +142,7 @@ public class Juego {
 		e = new Sirius(5,cel);
 		MisEnemigos[5] = e;
 		EnemigoHilo[5] = new EnemigoThread(e,g);
-		g.add(e.getGrafico());
+		g.add(e.getGrafico(),2);
 	}
 	
 	/**

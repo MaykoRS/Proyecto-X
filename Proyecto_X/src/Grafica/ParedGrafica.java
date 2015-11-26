@@ -18,11 +18,13 @@ public abstract class ParedGrafica {
 	
 	protected JLabel grafico;
 	protected Icon image;
-	
+	protected Icon image2;
 	protected Point pos;
 	
-	protected ParedGrafica(int x, int y){
+	protected ParedGrafica(int x, int y)
+	{
 		pos = new Point(x * width, y * height);
+		
 	}
 	
 	/**
@@ -42,5 +44,11 @@ public abstract class ParedGrafica {
 			this.grafico.setBounds(this.pos.x, this.pos.y, width, height);
 		}
 		return this.grafico;
+	}
+
+	public void destruir() 
+	{       
+
+		
 	}
 }
