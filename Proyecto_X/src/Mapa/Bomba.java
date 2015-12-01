@@ -1,11 +1,10 @@
 package Mapa;
 
 import javax.swing.JLabel;
-
-import El_Juego.ContadorBomba;
 import El_Juego.Tiempo;
 import Grafica.BombaGrafica;
 import Personajes.Bomberman;
+import Threads.ContadorBomba;
 
 /**
  * Clase correspondiente a la Implementacion del módulo Bomba. 
@@ -78,6 +77,7 @@ public class Bomba {
     {   
     	ContadorBomba cb = new ContadorBomba(this.bomberman,this,3000);
 		cb.start();
+		
     	//new ContadorBomba(bomberman,0).start();
     }
     
@@ -93,7 +93,8 @@ public class Bomba {
      * Devuelva una nueva bomba clonada.
      * @return Bomba clonada a devolver.
      */
-    public Bomba clone(){
+    public Bomba clone()
+    {
         Bomba B = new Bomba(nivelDeImpacto,posicion,tiempoTirada);
         return B; //modificar 
     }

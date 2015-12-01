@@ -1,6 +1,9 @@
 package Mapa;
 
+import javax.swing.ImageIcon;
+
 import Grafica.PDestruibleGrafica;
+import Grafica.PIndestructibleGrafica;
 import Personajes.Bomberman;
 import Personajes.Enemigo;
 
@@ -21,8 +24,9 @@ public class ParedDestruible extends Pared {
 	//Deberia retornar un entero que representa la cantidad de putnso
 	public void destruir() 
 	{
+		
 		grafico.destruir();
-		 
+		
 	}
 
 

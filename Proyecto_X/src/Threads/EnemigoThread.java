@@ -1,5 +1,6 @@
-package GUI;
+package Threads;
 
+import GUI.GUI;
 import Personajes.Enemigo;
 
 /**

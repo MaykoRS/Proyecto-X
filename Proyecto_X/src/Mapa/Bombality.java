@@ -1,5 +1,6 @@
 package Mapa;
 
+import Grafica.BombalityGrafica;
 import Personajes.Bomberman;
 
 /**
@@ -9,8 +10,10 @@ import Personajes.Bomberman;
  */
 public class Bombality extends PowerUp {
 
-    public Bombality(){
-    	super();
+    public Bombality(Celda c){
+    	super(c);
+    	this.MiGrafica = new BombalityGrafica(this.pos.getX(), this.pos.getY());
+    	Puntaje+=5;
     }
  
     

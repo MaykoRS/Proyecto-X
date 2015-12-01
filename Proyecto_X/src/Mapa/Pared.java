@@ -13,12 +13,14 @@ import Personajes.*;
 public abstract class Pared {
 	
 	protected Celda posicion;
+	protected int Puntaje;
 	
 	protected ParedGrafica grafico;
 	
 	protected Pared(Celda pos){
 		this.posicion = pos;
 		this.grafico = null;
+		Puntaje=10;
 	}
 	
 	public abstract void destruir();
@@ -52,4 +54,8 @@ public abstract class Pared {
 		return this.grafico.getGrafico();
 	}
 		
+	public int GetPuntaje()
+	{
+		return Puntaje;
+	}
 }

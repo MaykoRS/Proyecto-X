@@ -1,5 +1,7 @@
 package El_Juego;
 
+import GUI.GUI;
+
 /**
  *  Clase correpondiente a la implementación del módulo Tiempo. 
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
@@ -8,23 +10,27 @@ package El_Juego;
  *
  */
 public class Tiempo extends Thread{
-    protected int horas;
+	
     protected int minutos;
     protected int segundos;
+    protected GUI gui;
+    protected boolean detener;
 
-    public Tiempo() {
-        this.horas = 0;
+    public Tiempo(GUI g) 
+    {
+    	this.gui = g;
         this.minutos = 0;
         this.segundos = 0;
+        this.detener = false;
        
     }
     
     public void run(){
-    	while(true){
+    	while(!detener){
     		try {
     			Thread.sleep(1000);
     			calcularTiempo();
-    			System.out.println(horas + ":" + minutos+ ":" + segundos );
+    			//System.out.print(minutos+ ":" + segundos );
     		} catch (InterruptedException e) {
     		}
     	}
@@ -36,8 +42,18 @@ public class Tiempo extends Thread{
     		segundos=0;
     		minutos++;
     	}
+    	gui.setTiempo(minutos, segundos);
     }
 
+    
+    /**
+     * Detiene el hilo del Tiempo.
+     */
+    public void detener() {
+    	this.detener = true;
+    }
+    
+    
     /**
      * @param T 
      * @return
@@ -66,12 +82,6 @@ public class Tiempo extends Thread{
         return null;
     }
 
-    /**
-     * @return
-     */
-    public int getHoras() {
-        return this.horas;
-    }
 
     /**
      * @return

@@ -14,42 +14,21 @@ public abstract class Enemigo extends Personaje{
 	protected int puntosPorMuerte;
 	
 	protected Enemigo(Celda pos) {
+		
 		super(pos);
+		puntosPorMuerte=15;
 	
 	}
 	
 	protected Enemigo(int velocidad, Celda pos){
 		super(velocidad,pos);
+		puntosPorMuerte=20;
 	}
 	
 	/**
 	 * Mueve al enemigo con una dirección aleatoria.
 	 */
-	public void mover() {
-		Random r = new Random();
-		
-		int dir = r.nextInt(4);
-		
-		int direccion = -1;
-		switch (dir) {
-			case 0 : //Arriba
-				direccion = Celda.UP;
-				break;
-			case 1 : //Abajo
-				direccion = Celda.DOWN;
-				break;
-			case 2 : //Izquierda
-				direccion = Celda.LEFT;
-				break;
-			case 3 : //Derecha
-				direccion = Celda.RIGHT;
-				break;
-		}
-		Celda destino =  this.posicion.getVecina(direccion);
-		
-		destino.dejarPasar(this, direccion);
-			
-	}
+	public abstract void mover();
 
 	/**
 	 * Mueve al enemigo a una dirección indicada por parámetro. Respetando si es o no modoDios.

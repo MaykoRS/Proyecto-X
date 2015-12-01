@@ -3,7 +3,6 @@ package Grafica;
 import java.awt.Point;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
@@ -13,19 +12,17 @@ import javax.swing.JLabel;
  * @author Reyes Gastón Federico, Alumno de Universidad Nacional del Sur, LU: 106878
  * 
  */
-public abstract class ParedGrafica {
+public abstract class PowerUPGrafica {
 	protected final int width = 32;
 	protected final int height = 32;
 	
 	protected JLabel grafico;
 	protected Icon image;
-	//protected Icon image2;
+	
 	protected Point pos;
 	
-	protected ParedGrafica(int x, int y)
-	{
+	protected PowerUPGrafica(int x, int y){
 		pos = new Point(x * width, y * height);
-		
 	}
 	
 	/**
@@ -46,10 +43,9 @@ public abstract class ParedGrafica {
 		}
 		return this.grafico;
 	}
-
-	public void destruir() 
-	{       
-        
-		grafico.setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/celdaTransitable.png")));
+	
+	public Icon getImage(){
+		return this.image;
 	}
+	
 }

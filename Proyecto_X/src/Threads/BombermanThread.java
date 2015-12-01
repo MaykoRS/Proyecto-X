@@ -1,9 +1,7 @@
-package GUI;
+   package Threads;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
-import El_Juego.ContadorBomba;
+import GUI.GUI;
 import Mapa.Bomba;
 import Personajes.Bomberman;
 
@@ -20,19 +18,20 @@ public class BombermanThread extends Thread {
 	private GUI gui;
 	private boolean detener = false;
 	
-//	private static int velocidadEstandar = 1500;
-//	private int velocidad;
+	private static int velocidadEstandar = 800;
+	private int velocidad;
 
 	public BombermanThread(Bomberman b, GUI gui) {
 		this.bomberman = b;
 		this.gui = gui;
 		this.detener = false;
+		this.velocidad = b.getVelocidad();
 	}
 
 	public void run() {
 		while(!detener){
 			try {
-				Thread.sleep(500);
+				Thread.sleep(velocidadEstandar / velocidad);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} 
@@ -43,22 +42,32 @@ public class BombermanThread extends Thread {
 			if(gui.getLock()){
 				if(direccionValida()){
 					this.bomberman.mover(gui.getDirection());
+					if(bomberman.getPosicion().hayPowerUp())
+					{
+						bomberman.getPosicion().getPowerUp().afectarPersonaje(bomberman);
+						bomberman.getJuego().incrementarPuntaje(bomberman.getPosicion().getPowerUp().getPuntaje());
+						bomberman.getPosicion().setPowerUp();
+						
+						
+						
+					}
 					gui.toggleLock();
 				}else{
 					Bomba actual = this.bomberman.soltarBomba(gui.getDirection());
-					this.bomberman.getPosicion().agregarBomba(actual);
-					//System.out.println(actual);
+					
 					if(actual!=null){
-						gui.add(actual.getGrafico());
-//						bomberman.getPosicion().getGrafico().getGrafico().setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/Bomba.png")));
+						this.bomberman.getPosicion().agregarBomba(actual);
 						actual.esperarParaExplotar();
+						
+						
 					}
 					gui.toggleLock();
 				}
 				
 			} 
-			if(this.bomberman.getPosicion().contactoConEnemigo(bomberman)){
+			if(this.bomberman.getPosicion().contactoConEnemigo(bomberman) && !bomberman.soyDios()){
 				JOptionPane.showMessageDialog(null,"Bomberman ha sido afectado - GAME OVER");
+				this.bomberman.morir();
 				this.destruir();
 			}
 		}

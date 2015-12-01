@@ -1,11 +1,14 @@
 package Mapa;
 
+import Grafica.FatalityGrafica;
 import Personajes.Bomberman;
 
 public class Fatality extends PowerUp {
 
-    public Fatality(){
-    	super();
+    public Fatality(Celda c){
+    	super(c);
+    	this.MiGrafica = new FatalityGrafica(this.pos.getX(), this.pos.getY());
+    	Puntaje+=5;
     }
 
     

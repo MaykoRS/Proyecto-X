@@ -1,23 +1,30 @@
 package Mapa;
 
+import Grafica.MasacralityGrafica;
 import Personajes.Bomberman;
+import Threads.MasacralityThread;
 
 public class Masacrality extends PowerUp {
 
    
-    public Masacrality(){
-    	super();
+    public Masacrality(Celda c){
+    	super(c);
+    	this.MiGrafica = new MasacralityGrafica(this.pos.getX(), this.pos.getY());
+    	Puntaje+=20;
     }
  
     /**
      * @param B
      */
     public void afectarPersonaje(Bomberman B){
-       B.setModoDios(true);
 	   modificarMaxBombas(B);
 	   B.setModoDios(true);
-       //durante 5s luego se setea en false
-    }
+	   MasacralityThread hilo = new MasacralityThread(B);
+       hilo.start();
+   }
+
+     
+    
 
     /**
      * 

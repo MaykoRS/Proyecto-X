@@ -2,12 +2,13 @@ package El_Juego;
 
 import java.util.Random;
 
+
 import javax.swing.JLabel;
 
 import GUI.GUI;
 import Mapa.*;
 import Personajes.*;
-import GUI.EnemigoThread;
+import Threads.EnemigoThread;
 
 
 
@@ -25,41 +26,42 @@ public class Juego {
 	
 	protected EnemigoThread [] EnemigoHilo;
 	protected Enemigo [] MisEnemigos;
+	protected PowerUp[] MisPowerUps;
 	protected Bomberman MiBomberman;
 	protected Tiempo MarcadorTiempo;
 	protected GUI MiGui;
 	protected Mapa MiMapa;
 	
+	private int cantSpeedUp = 4;
+	private int cantFatality = 3;
+	private int cantBombality = 3;
+	private int cantMasacrality = 1;
+	
+	protected boolean detener;
+	protected boolean gane;
+	protected int cantPDestruibles;
+	
+	
 	public Juego(GUI gui){
 		this.MiGui = gui;
 		this.MiMapa = new Mapa(HEIGHT,WIDTH);
+		this.puntaje = 0;
+		this.detener = false;
+		this.gane = false;
+		this.cantPDestruibles = 124;
+		this.MarcadorTiempo = new Tiempo(MiGui);
+		this.MarcadorTiempo.start();
 		
+		/* Inserto a Bomberman en su respectiva celda */
 		Celda c = this.MiMapa.getCelda(1,1);
-		MiBomberman = new Bomberman(1,c);
-		this.MiGui.add(MiBomberman.getGrafico());
+		MiBomberman = new Bomberman(1,c,this);
+		this.MiGui.add(MiBomberman.getGrafico(),0);
         
-		insertarCeldasTransitables(MiGui);
+		
 		insertarParedes(MiGui);
 		insertarEnemigos(MiGui);
-		
-		MarcadorTiempo = new Tiempo();
-	}
+		insertarCeldasTransitables(MiGui);
 	
-	
-	/**
-	 * Inserto en el mapa todas las celdas transitables.
-	 * @param g GUI a añadir.
-	 */
-	private void insertarCeldasTransitables(GUI g) {
-		Celda cel;
-		
-		for(int f=0; f<HEIGHT; f++){
-			for(int c=0; c <WIDTH; c++) {
-				cel= MiMapa.getCelda(f,c);
-				cel.agregarCeldaTransitable(cel.getGrafico());
-				g.add(cel.getGrafico().getGrafico(),-1);	
-			}
-		}
 	}
 	
 	/**
@@ -76,8 +78,10 @@ public class Juego {
 					cel = this.MiMapa.getCelda(f,c);
 					p = new ParedIndestructible(cel);
 					cel.agregarPared(p);
-					g.add(p.getGrafico(),0);
-				}			
+					g.add(p.getGrafico());
+				}	
+				
+					
 			}
 		}
 		
@@ -86,7 +90,7 @@ public class Juego {
 		int ancho; 	int altura;
 		int contador = 0;
 		
-		while(contador < 124){ // 124 ES EL 50% DE LAS CELDAS NO OCUPADAS POR PARED INDESTRUCTIBLE
+		while(contador < cantPDestruibles){ // 124 ES EL 50% DE LAS CELDAS NO OCUPADAS POR PARED INDESTRUCTIBLE
 			try {
 				ancho = (int)(rnd.nextDouble()*29 +1);
 				altura = (int)(rnd.nextDouble()*11 +1);
@@ -94,7 +98,8 @@ public class Juego {
 				if(!cel.hayPared() && !lugarReservado(ancho,altura) ){
 					p = new ParedDestruible(cel);
 					cel.agregarPared(p);
-					g.add(p.getGrafico(),1);
+					g.add(p.getGrafico(),1 );
+					agregarPowerUp(cel);
 					contador++;
 				}
 			} catch (Exception e) {
@@ -102,6 +107,50 @@ public class Juego {
 			}
 		}
 	}
+	
+	/**
+	 * Crea e inserta a todos los powerUp 'detrás' de las paredes destruíbles y los añade en la GUI pasada por paràmetro. 
+	 * @param g GUI a añadir.
+	 */
+	private void agregarPowerUp(Celda c)
+	{
+		if(cantFatality>0)
+		{	Fatality f = new Fatality(c);
+			c.agregarPowerUp(f);
+			//MiGui.add(f.getGrafico(),2);
+			cantFatality--;
+		}
+		else
+		{
+			if(cantMasacrality>0)
+			{	Masacrality m = new Masacrality(c);
+				c.agregarPowerUp(m);
+				//MiGui.add(m.getGrafico(),2);
+				cantMasacrality--;
+			}
+			else
+			{
+				if(cantSpeedUp>0)
+				{	Speed_Up s = new Speed_Up(c);
+					c.agregarPowerUp(s);
+					//MiGui.add(s.getGrafico(),2);
+					cantSpeedUp--;
+				}
+				else
+				{
+					if(cantBombality>0) {
+						Bombality b = new Bombality(c);
+						c.agregarPowerUp(b);
+						//MiGui.add(b.getGrafico(),2);
+						cantBombality--;
+					}
+				}
+						
+			}
+		}
+		
+	}
+	
 	
 	/**
 	 * Crea e inserta a todos los enemigos y los añade en la GUI pasada por paràmetro. 
@@ -123,12 +172,12 @@ public class Juego {
 					if(i < 3){
 						e = new Rugulo(1,cel);
 						cel.agregarEnemigo(e); 
-						g.add(e.getGrafico(),2);
+						g.add(e.getGrafico(),0);
 					}
 					else{ 
 						e = new Altair(1,cel);
 						cel.agregarEnemigo(e);
-						g.add(e.getGrafico(),2);
+						g.add(e.getGrafico(),0);
 					}
 					MisEnemigos[i] = e;
 					EnemigoHilo[i] = new EnemigoThread(e,g); 
@@ -139,10 +188,26 @@ public class Juego {
 			}
 		}
 		cel = this.MiMapa.getCelda(29,11);
-		e = new Sirius(5,cel);
+		e = new Sirius (5,cel,this);
 		MisEnemigos[5] = e;
 		EnemigoHilo[5] = new EnemigoThread(e,g);
-		g.add(e.getGrafico(),2);
+		g.add(e.getGrafico(),0);
+	}
+	
+	
+	/**
+	 * Agrega a cada celda una celda transitable ( fondo del mapa ).
+	 * @param g GUI a añadir.
+	 */
+	private void insertarCeldasTransitables(GUI g) {
+		Celda cel;
+		
+		for(int f=0; f<HEIGHT; f++){
+			for(int c=0; c <WIDTH; c++)	{
+				cel= MiMapa.getCelda(f,c);		
+				g.add(cel.getGrafico().getGrafico());
+			}
+		}
 	}
 	
 	/**
@@ -165,9 +230,6 @@ public class Juego {
 		return this.MiBomberman;
 	}
 	
-//	public GUI getGUI(){
-//		return this.MiGui;
-//	}
 	
 	/**
 	 * Inicia los hilos para cada uno de lo enemigos.
@@ -202,6 +264,40 @@ public class Juego {
 	public void incrementarPuntaje(int puntosPorMuerte) {
 		this.puntaje += puntosPorMuerte;
 		
+	}
+
+	public GUI getGui() {
+		return MiGui;
+	}
+	
+	public int getPuntaje() {
+		return puntaje;
+	}
+
+	public void disminuirPDestruible() {
+		this.cantPDestruibles-- ;
+		if(cantPDestruibles == 0){
+			gane = true;
+			this.detenerTiempo();
+		}
+	}
+	
+	public void detenerTiempo() {
+		this.detener = true;
+		this.MarcadorTiempo.detener();
+		
+		// Corto el hilo de los enemigos activos.
+		for(EnemigoThread eh : EnemigoHilo){
+			eh.detener();
+		}
+	}
+	
+	public boolean detener(){
+		return this.detener;
+	}
+	
+	public boolean gane(){
+		return this.gane;
 	}
 	
 }

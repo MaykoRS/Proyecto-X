@@ -2,6 +2,8 @@ package Personajes;
 
 import java.awt.event.KeyEvent;
 
+import javax.swing.JOptionPane;
+
 import El_Juego.Juego;
 import Grafica.BombermanGrafica;
 import Mapa.Bomba;
@@ -17,7 +19,6 @@ public class Bomberman extends Personaje{
 	private int MaxBomba;
 	private int alcanceBomba = 1;
 	private Juego Mijuego;
-	private Bomba MiBomba;
 	private boolean tirarBomba;
 	
 	/**
@@ -25,19 +26,22 @@ public class Bomberman extends Personaje{
 	 * @param velocidad Velocidad inicializada del Bomberman.
 	 * @param pos Posicion del Bomberman.
 	 */
-	public Bomberman(int velocidad, Celda pos) {
+	public Bomberman(int velocidad, Celda pos,Juego j) {
 		super(velocidad,pos);
+		this.Mijuego = j;
 		this.grafico = new BombermanGrafica(this.velocidad, this.posicion.getX(), this.posicion.getY());
 		this.modoDios = false;
 		tirarBomba=true;
+		MaxBomba=1;
 	}					
 	
 	/**
 	 * Crea consctructor con un parámetro.
 	 * @param pos Posición del Bomberman.
 	 */
-	public Bomberman(Celda pos){
+	public Bomberman(Celda pos, Juego j){
 		super(pos);
+		this.Mijuego = j;
 		
 		this.grafico = new BombermanGrafica(this.velocidad, this.posicion.getX(), this.posicion.getY());
 	}
@@ -99,7 +103,8 @@ public class Bomberman extends Personaje{
 	 */
 	public void morir() {
 		this.grafico.morir();
-		vive=false;
+		vive = false;
+		this.getJuego().detenerTiempo();
 	}
 	
 	/**
@@ -127,16 +132,20 @@ public class Bomberman extends Personaje{
 	 */
 	public Bomba soltarBomba(int dir) {
 		Bomba nueva = null ;
-		if(dir == KeyEvent.VK_SPACE)
-		{
-			if (tirarBomba)
-			{
+		if(dir == KeyEvent.VK_SPACE) {
+			if (!soyDios()) {
+				if (puedoTirarOtraBomba()) {
+					nueva = new Bomba(alcanceBomba,this.posicion,this);
+				    posicion.agregarBomba(nueva);
+				    MaxBomba--;
+			   	}
+			}
+			else {	
 				nueva = new Bomba(alcanceBomba,this.posicion,this);
-			    posicion.agregarBomba(MiBomba);
-			    tirarBomba=false;
+		        posicion.agregarBomba(nueva);
 		    }
-		}
-		return nueva;
+	    }
+		 return nueva;
    	}
 	
 	/**
@@ -178,7 +187,7 @@ public class Bomberman extends Personaje{
 	 */
 	public boolean puedoTirarOtraBomba()
 	{
-		return tirarBomba;
+		return MaxBomba>0;
 	}
 	 
 	/**
@@ -203,4 +212,18 @@ public class Bomberman extends Personaje{
 		tirarBomba=b;
 	}
 	
+	public Juego getJuego()
+	{
+		return Mijuego;
+	}
+
+	public void cambiarSoyDios()
+	{
+		modoDios=!modoDios;
+		
+	}
+	public void establecerBomba()
+	{
+		MaxBomba++;
+	}
 }

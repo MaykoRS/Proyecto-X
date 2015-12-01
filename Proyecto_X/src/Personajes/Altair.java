@@ -1,5 +1,7 @@
 package Personajes;
 
+import java.util.Random;
+
 import Grafica.AltairGrafica;
 import Mapa.Celda;
 
@@ -18,6 +20,8 @@ public class Altair extends Enemigo {
 		super(pos);
 		this.modoDios = true;
 		this.grafico = new AltairGrafica(this.velocidad, this.posicion.getX(), this.posicion.getY());
+		puntosPorMuerte+=5;
+		
 	}
 	
 	/**
@@ -47,4 +51,29 @@ public class Altair extends Enemigo {
 		getGrafico().setIcon(null);
 	}
 
+	public void mover() {
+		Random r = new Random();
+		
+		int dir = r.nextInt(4);
+		
+		int direccion = -1;
+		switch (dir) {
+			case 0 : //Arriba
+				direccion = Celda.UP;
+				break;
+			case 1 : //Abajo
+				direccion = Celda.DOWN;
+				break;
+			case 2 : //Izquierda
+				direccion = Celda.LEFT;
+				break;
+			case 3 : //Derecha
+				direccion = Celda.RIGHT;
+				break;
+		}
+		Celda destino =  this.posicion.getVecina(direccion);
+		
+		destino.dejarPasar(this, direccion);
+			
+	}
 }

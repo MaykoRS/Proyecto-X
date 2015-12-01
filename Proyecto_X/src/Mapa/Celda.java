@@ -35,8 +35,10 @@ public class Celda {
 	protected CeldaGrafica grafico;
 	protected int x,y;
 	
+	
 	public Celda(Mapa map, int x, int y)
 	{
+		
 		this.x=x;
 		this.y=y;
 		this.MiMapa = map;
@@ -45,15 +47,15 @@ public class Celda {
 	    grafico= new CeldaGrafica(x,y);
 	   
 	}
-	
-	public void agregarCeldaTransitable(CeldaGrafica ct){
-		this.grafico = ct;
+	public void agregarPowerUp(PowerUp p)
+	{
+		MiPowerUp=p;
 	}
-	
 	
 	public void agregarBomba(Bomba b)
 	{
 		this.MiBomba = b;
+		grafico.agregarBomba(b);
 		
 		
 	}
@@ -62,7 +64,7 @@ public class Celda {
 	 * @return True y sòlo si hay pared.
 	 */
 	public boolean hayPared(){
-		return  MiPared != null;
+		return MiPared != null;
 	}
 	
 	
@@ -80,6 +82,7 @@ public class Celda {
 	 */
 	public PowerUp getPowerUp(){
 		return this.MiPowerUp;
+		
 	}
 	
 	/**
@@ -113,11 +116,9 @@ public class Celda {
 	 */
 	public void removeEnemigo(Enemigo e){
 		this.MisEnemigos.remove(e);
+		//grafico.setGrafico();
 	}
-	
-//	public Enemigo buscarEnemigo(int pos){
-//		return this.MisEnemigos.get(pos);
-//	}
+
 	
 	/**
 	 * Devuelve el atributo MiBomberman.
@@ -147,7 +148,14 @@ public class Celda {
 	 * Elimina Pared.
 	 * @param p Pared a eliminar.
 	 */
-	public void removePared() {
+	public void removePared()
+	{
+		this.MiPared.getGrafico().setIcon(null);
+
+		if(MiPowerUp!=null){
+			this.grafico.agregarPowerUP(MiPowerUp);
+			
+		}
 		this.MiPared = null;
 	     
 	}
@@ -218,9 +226,25 @@ public class Celda {
 	}
 	
 	
-	public CeldaGrafica getGrafico() {
+	public CeldaGrafica getGrafico()
+	{
 		return grafico;
 	}
+
+	
+	public void setPowerUp()
+	{
+		MiPowerUp = null;
+		grafico.setGrafico();
+		
+		
+	}
+	public void setGraficaExplosion() 
+	{
+		grafico.setExplosion();
+		
+	}
+	
 
 	
 }
