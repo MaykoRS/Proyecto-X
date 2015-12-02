@@ -1,18 +1,11 @@
 package Mapa;
 
 
-import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
-import Grafica.BombaGrafica;
 import Grafica.CeldaGrafica;
-import Grafica.PDestruibleGrafica;
 import Personajes.*;
+import PowerUps.PowerUp;
 
 /**
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130

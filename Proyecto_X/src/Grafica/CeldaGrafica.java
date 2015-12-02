@@ -2,12 +2,13 @@ package Grafica;
 
 import java.awt.Point;
 
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Mapa.Bomba;
-import Mapa.PowerUp;
+import PowerUps.PowerUp;
 
 public class CeldaGrafica 
 {

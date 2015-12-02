@@ -1,6 +1,7 @@
-package Mapa;
+package PowerUps;
 
 import Grafica.MasacralityGrafica;
+import Mapa.Celda;
 import Personajes.Bomberman;
 import Threads.MasacralityThread;
 
@@ -17,24 +18,8 @@ public class Masacrality extends PowerUp {
      * @param B
      */
     public void afectarPersonaje(Bomberman B){
-       B.setModoDios(true);
-	   modificarMaxBombas(B);
-	   B.setModoDios(true);
-	   MasacralityThread hilo = new MasacralityThread(B);
-       hilo.start();
-   }
-
-     
-    
-
-    /**
-     * 
-     */
-    private void modificarMaxBombas(Bomberman B){
-        B.setMaxBombas(999);
+ 	   MasacralityThread hilo = new MasacralityThread(B);
+        hilo.start();
     }
-
-    
-    
 
 }

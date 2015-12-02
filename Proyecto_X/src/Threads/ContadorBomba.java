@@ -96,7 +96,7 @@ public class ContadorBomba extends Thread {
 					}
 							
 				}
-				//System.out.println("EXPLOTE");
+				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

@@ -1,6 +1,7 @@
-package Mapa;
+package PowerUps;
 
 import Grafica.FatalityGrafica;
+import Mapa.Celda;
 import Personajes.Bomberman;
 
 public class Fatality extends PowerUp {

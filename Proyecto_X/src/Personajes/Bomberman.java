@@ -8,6 +8,7 @@ import El_Juego.Juego;
 import Grafica.BombermanGrafica;
 import Mapa.Bomba;
 import Mapa.Celda;
+import Threads.MasacralityThread;
 
 /**
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
@@ -17,7 +18,7 @@ import Mapa.Celda;
 public class Bomberman extends Personaje{
 
 	private int MaxBomba;
-	private int alcanceBomba = 2;
+	private int alcanceBomba = 1;
 	private Juego Mijuego;
 	
 	
@@ -31,7 +32,7 @@ public class Bomberman extends Personaje{
 		Mijuego=j;
 		this.grafico = new BombermanGrafica(this.velocidad, this.posicion.getX(), this.posicion.getY());
 		this.modoDios = false;
-		MaxBomba=1;
+		MaxBomba = 1;
 	}					
 	
 	/**
@@ -159,25 +160,9 @@ public class Bomberman extends Personaje{
 	 * Aumenta cantidad màxima de bombas.
 	 * @param m Cantidad a aumentar.
 	 */
-	public void setMaxBombas(int m){
-    	this.MaxBomba += m;
+	public void aumentarMaxBombas(){
+    	this.MaxBomba ++;
     }
-	
-	/**
-	 * Devuelve true si y solo si logra matar al menos a uno.
-	 * @return True si y solo si logra matar al menos a uno.
-	 */
-	public boolean mateAalguien(){
-		boolean mate = false;
-    	if(posicion.hayEnemigo()){
-    		 for(int i=0;i<posicion.getEnemigos().size();i++){
-    			Mijuego.incrementarPuntaje(posicion.getEnemigos().get(i).getPuntosPorMuerte());
-    			posicion.removeEnemigo(posicion.getEnemigos().get(i));
-    		  }
-    		mate = true;		
-       }
-       	return mate;
-  	 }
 	
 	/**Devuelve el valor de verdad de si es posible o no tirar otra bomba
 	 * 
@@ -212,11 +197,16 @@ public class Bomberman extends Personaje{
 
 	public void cambiarSoyDios()
 	{
-		modoDios=!modoDios;
+		modoDios =! modoDios;
 		
 	}
 	public void establecerBomba()
 	{
 		MaxBomba++;
+	}
+
+	public void setCantBombas(int cant) {
+		MaxBomba = cant;
+		
 	}
 }

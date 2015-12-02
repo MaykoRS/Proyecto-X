@@ -1,6 +1,7 @@
-package Mapa;
+package PowerUps;
 
 import Grafica.SpeedUpGrafica;
+import Mapa.Celda;
 import Personajes.Bomberman;
 
 public class Speed_Up extends PowerUp {

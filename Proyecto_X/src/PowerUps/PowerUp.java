@@ -1,9 +1,10 @@
-package Mapa;
+package PowerUps;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
 import Grafica.PowerUPGrafica;
+import Mapa.Celda;
 import Personajes.Bomberman;
 
 public abstract class PowerUp{

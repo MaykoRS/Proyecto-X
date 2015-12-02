@@ -1,6 +1,7 @@
-package Mapa;
+package PowerUps;
 
 import Grafica.BombalityGrafica;
+import Mapa.Celda;
 import Personajes.Bomberman;
 
 /**
@@ -18,7 +19,7 @@ public class Bombality extends PowerUp {
  
     
     public void afectarPersonaje(Bomberman B){
-        B.setMaxBombas(1);
+        B.aumentarMaxBombas();
     }
 
 }

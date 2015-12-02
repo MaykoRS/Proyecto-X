@@ -1,13 +1,10 @@
 package El_Juego;
 
 import java.util.Random;
-
-
-import javax.swing.JLabel;
-
 import GUI.GUI;
 import Mapa.*;
 import Personajes.*;
+import PowerUps.*;
 import Threads.EnemigoThread;
 
 
