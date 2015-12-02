@@ -109,7 +109,7 @@ public class GUI extends JFrame {
 	}
 	
 	public void setPuntaje(String g) {
-		labelPuntaje.setText("Puntaje :"+" "+g);
+		labelPuntaje.setText("Puntaje: "+" "+g);
 	}
 	
 	public void setTiempo(int m, int s){
@@ -122,7 +122,7 @@ public class GUI extends JFrame {
 		inferior.setBackground(Color.LIGHT_GRAY);
 		inferior.setLayout(new FlowLayout(FlowLayout.CENTER, 115, 18));
 		
-		labelTiempo = new JLabel("Tiempo: 00:00");
+		labelTiempo = new JLabel("Tiempo: 00:00:00");
 		labelPuntaje = new JLabel("Puntaje: 0");
 		
 		inferior.add(labelTiempo);

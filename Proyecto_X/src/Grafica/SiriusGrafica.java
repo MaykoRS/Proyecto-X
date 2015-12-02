@@ -11,6 +11,12 @@ import javax.swing.ImageIcon;
  */
 public class SiriusGrafica extends EnemigoGrafica {
 
+	/**
+	 * Crea un constructor de tres parámetros.
+	 * @param velocidad representa la velocidad del EnemigoGrafica.
+	 * @param x representa la coordenada x de la posición en la que se encuentra.
+	 * @param y representa la coordenada y de la posición en la que se encuentra.
+	 */
 	public SiriusGrafica(int velocidad, int x, int y) {
 		super(velocidad, x, y);
 

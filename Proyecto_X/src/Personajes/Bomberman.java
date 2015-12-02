@@ -142,6 +142,7 @@ public class Bomberman extends Personaje{
 			else {	
 				nueva = new Bomba(alcanceBomba,this.posicion,this);
 		        posicion.agregarBomba(nueva);
+		        MaxBomba--;
 		    }
 	    }
 		 return nueva;

@@ -3,11 +3,10 @@ package Grafica;
 import java.awt.Point;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Clase correspondiente a la implementación de la parte gráfica de la clase pared.
+ * Clase correspondiente a la implementación de la parte gráfica de la clase Pared.
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
  * @author Escudero Johanna Valeria, Alumna de Universidad Nacional del Sur, LU 105868
  * @author Reyes Gastón Federico, Alumno de Universidad Nacional del Sur, LU: 106878
@@ -16,12 +15,15 @@ import javax.swing.JLabel;
 public abstract class ParedGrafica {
 	protected final int width = 32;
 	protected final int height = 32;
-	
 	protected JLabel grafico;
 	protected Icon image;
-	//protected Icon image2;
 	protected Point pos;
 	
+	/**
+	 * Crea un constructor con dos parámetros.
+	 * @param x representa la coordenada x de su posición.
+	 * @param y representa la coordenada y de su posición.
+	 */
 	protected ParedGrafica(int x, int y)
 	{
 		pos = new Point(x * width, y * height);
@@ -47,9 +49,4 @@ public abstract class ParedGrafica {
 		return this.grafico;
 	}
 
-	public void destruir() 
-	{       
-        
-		grafico.setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/celdaTransitable.png")));
-	}
 }

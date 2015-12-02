@@ -18,7 +18,7 @@ public class BombermanThread extends Thread {
 	private GUI gui;
 	private boolean detener = false;
 	
-	private static int velocidadEstandar = 700;
+	private static int velocidadEstandar = 600;
 	private int velocidad;
 
 	public BombermanThread(Bomberman b, GUI gui) {

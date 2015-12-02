@@ -11,6 +11,12 @@ import javax.swing.ImageIcon;
  */
 public class AltairGrafica extends EnemigoGrafica {
 
+	/**
+	 * Crea un constructor con tres parámetros
+	 * @param velocidad representa la velocidad del PersonajeGrafica
+	 * @param x  representa la coordenada x de su posición
+	 * @param y  representa la coordenada y de su posición
+	 */
 	public AltairGrafica(int velocidad, int x, int y) {
 		super(velocidad, x, y);
 		

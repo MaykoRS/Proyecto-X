@@ -39,6 +39,10 @@ public class Juego {
 	protected int cantPDestruibles;
 	
 	
+	/**
+	 * Crea un constructor con un único parámetro
+	 * @param gui GUI
+	 */
 	public Juego(GUI gui){
 		this.MiGui = gui;
 		this.MiMapa = new Mapa(HEIGHT,WIDTH);
@@ -263,14 +267,26 @@ public class Juego {
 		
 	}
 
+	/**
+	 * Retorna el valor del atributo MiGui
+	 * @return MiGui
+	 */
 	public GUI getGui() {
 		return MiGui;
 	}
 	
+	/**
+	 * Retorna el valor del atributo puntaje
+	 * @return puntaje
+	 */
 	public int getPuntaje() {
 		return puntaje;
 	}
-
+	
+	/**
+	 * Metodo encargado de disminuir la cantidad de 
+	 * paredes destruibles
+	 */
 	public void disminuirPDestruible() {
 		this.cantPDestruibles-- ;
 		if(cantPDestruibles == 0){
@@ -279,6 +295,10 @@ public class Juego {
 		}
 	}
 	
+	/**
+	 * Comando  encargado de detener el tiempo
+	 * y cortar el hilo de los enemigos.
+	 */
 	public void detenerTiempo() {
 		this.detener = true;
 		this.MarcadorTiempo.detener();
@@ -289,9 +309,17 @@ public class Juego {
 		}
 	}
 	
+	/**
+	 * Retorna el valor de verdad del atributo detener
+	 * @return detener
+	 */
 	public boolean detener(){
 		return this.detener;
 	}
+	/**
+	 * Retorna el valor de verdad del atributo gane
+	 * @return gane
+	 */
 	
 	public boolean gane(){
 		return this.gane;

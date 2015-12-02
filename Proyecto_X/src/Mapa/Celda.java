@@ -28,7 +28,12 @@ public class Celda {
 	protected CeldaGrafica grafico;
 	protected int x,y;
 	
-	
+	/**
+	 * Crea un constructor con tres parámetros.
+	 * @param map valor nuevo del atributo MiMapa
+	 * @param x coordenada x de su ubicación
+	 * @param y coordenada y de su ubicación
+	 */
 	public Celda(Mapa map, int x, int y) {	
 		this.x=x;
 		this.y=y;
@@ -38,11 +43,20 @@ public class Celda {
 	    grafico= new CeldaGrafica(x,y);
 	   
 	}
+	
+	/**
+	 * Comando encargado de setear el atributo MiPowerUp
+	 * @param p PowerUp
+	 */
 	public void agregarPowerUp(PowerUp p)
 	{
 		MiPowerUp=p;
 	}
 	
+	/**
+	 * Comando encargado de agregar la bomba a la celda
+	 * @param b Bomba
+	 */
 	public void agregarBomba(Bomba b)
 	{
 		this.MiBomba = b;
@@ -107,7 +121,7 @@ public class Celda {
 	 */
 	public void removeEnemigo(Enemigo e){
 		this.MisEnemigos.remove(e);
-		//grafico.setGrafico();
+		
 	}
 
 	
@@ -135,30 +149,46 @@ public class Celda {
 		this.MiPared = p;
 	}
 	
+	
 	/**
-	 * Elimina Pared.
-	 * @param p Pared a eliminar.
+	 * Retorna true si y sólo si logra remover la pared.
+	 * @return True si y sólo si logra remover la pared.
 	 */
-	public void removePared()
-	{
-		if(this.MiPared.destruir())
+	public boolean removePared()
+	{	
+		boolean destrui = this.MiPared.destruir();
+		if(destrui)
 			this.MiPared = null;
-	     
+		
+		return destrui;
 	}
 	
 	/**
-	 * 
-	 * @param e
-	 * @return
+	 * Consulta encargada de retornar el valor de verdad de si el Enemigo recibido por parametro
+	 * tuvo contacto con el Bomberman
+	 * @param e Enemigo
+	 * @return el valor de verdad
 	 */
 	public boolean contactoConBomberman(Enemigo e){
 		return this.MiBomberman != null;
 	}
 	
+	/**
+	 * Consulta que retorna el valor de verdad de si el Bomberman tuvo contacto con el Enemigo
+	 * @param b Bomberman
+	 * @return valor de verdad
+	 */
 	public boolean contactoConEnemigo(Bomberman b){
 		return this.hayEnemigo();
 	}
 	
+	
+	/**
+	 * Comando encargado de decidir si el Bomberman puede avanzar en la dirección
+	 * pasada por parámetro
+	 * @param b Bomberman
+	 * @param dir dirección en la que desea avanzar
+	 */
 	public void dejarPasar(Bomberman b, int dir){
 		if(this.hayPared()){
 			this.MiPared.recibirBomberman(b,dir);
@@ -167,6 +197,13 @@ public class Celda {
 			b.moverAhora(dir);
 		}
 	}
+	
+	/**
+	 * Comando encargado de decidir si el Enemigo puede avanzar en la dirección
+	 * pasada por parámetro
+	 * @param e Enemigo 
+	 * @param dir dirección en la que desea avanzar
+	 */
 	
 	public void dejarPasar(Enemigo e, int dir){
 		if(this.hayPared()){
@@ -177,6 +214,11 @@ public class Celda {
 		}
 	}
 	
+	/**
+	 * Consulta que retorna la Celda vecina en la dirección pasada por parámetro
+	 * @param dir dirección en la cual se desea ubicar la celda
+	 * @return Celda 
+	 */
 	public Celda getVecina(int dir){
 		switch (dir){
 			case UP :
@@ -191,44 +233,69 @@ public class Celda {
 		return null;
 	}
 	
+	/**
+	 * Consulta que retorna el valor del atributo x
+	 * @return x
+	 */
 	public int getX(){
 		return this.x;
 	}
+	
+	/**
+	 * Consulta que retorna el valor del atributo y
+	 * @return y
+	 */
 	
 	public int getY(){
 		return this.y;
 	}
 
+	/**
+	 * Consulta que retorna la lista de Enemigo
+	 * @return ArrayList<Enemigo>
+	 */
 	public ArrayList<Enemigo> getEnemigos() {
 		return MisEnemigos;
 	}
 
+	/**
+	 * Consulta que retorna el atributo MiPared
+	 * @return MiPared
+	 */
 	public Pared getPared() {
 		return this.MiPared;
 	}
 
+	/**
+	 * Retorna el valor del atributo MiBomba
+	 * @return MiBomba
+	 */
 	public Bomba getBomba() {
 		return this.MiBomba;
 	}
 	
+	/**
+	 * Consulta que retorna el atributo grafico
+	 * @return  grafico
+	 */
 	
 	public CeldaGrafica getGrafico()
 	{
 		return grafico;
 	}
 
-	
-	public CeldaGrafica CeldaGrafica()
-	{
-		return grafico;
-	}
+	/**
+	 * Comando encargado de setear el valor del PowerUp a nulo
+	 */
 	public void setPowerUp()
 	{
 		MiPowerUp=null;
 		grafico.setGrafico();
-		
-		
 	}
+	
+	/**
+	 * Comando encargado de setear la explosión
+	 */
 	public void setGraficaExplosion() 
 	{
 		grafico.setExplosion();

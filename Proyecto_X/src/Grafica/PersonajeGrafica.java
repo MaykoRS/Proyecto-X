@@ -22,7 +22,12 @@ public abstract class PersonajeGrafica {
 	
 	protected int velocidad;
 	protected Point pos;
-	
+	/**
+	 * Crea un constructor de tres parámetros.
+	 * @param velocidad entero que representa la velocidad del grafico.
+	 * @param x coordenada x de la posición en la que se encuentra.
+	 * @param y coordenada y de la posición en la que se encuentra.
+	 */
 	protected PersonajeGrafica(int velocidad, int x, int y){
 		pos = new Point(x * this.width, y * this.height);
 		this.velocidad = velocidad;

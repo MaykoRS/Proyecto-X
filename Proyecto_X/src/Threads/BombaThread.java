@@ -34,7 +34,7 @@ import Mapa.ParedDestruible;
 import Personajes.Bomberman;
 import Personajes.Enemigo;
 
-public class ContadorBomba extends Thread {
+public class BombaThread extends Thread {
 	
 	private Bomberman bomberman;
 	private Bomba bomba;
@@ -42,7 +42,7 @@ public class ContadorBomba extends Thread {
 	private boolean detener = false;
  
 	
-	public ContadorBomba(Bomberman B, Bomba b, int t){
+	public BombaThread(Bomberman B, Bomba b, int t){
 		this.bomberman = B;
 		this.tiempo = t;
 		this.bomba=b;
@@ -84,15 +84,8 @@ public class ContadorBomba extends Thread {
 
 				for(Celda c : listCeldas){
 					if(c != null){	
-						if(c.hayEnemigo()){
+						if(!c.hayPowerUp())
 							c.getGrafico().setGrafico();
-						}else
-						if(c.getBomba() != null){
-							c.getGrafico().setGrafico();
-						}else
-						if(!c.hayPowerUp()){
-							c.getGrafico().setGrafico();
-						}
 					}
 							
 				}
@@ -117,10 +110,11 @@ public class ContadorBomba extends Thread {
 			bomberman.getJuego().incrementarPuntaje(celdaActual.getPared().GetPuntaje());
 			String g = Integer.toString(bomberman.getJuego().getPuntaje());
 			bomberman.getJuego().getGui().setPuntaje(g);
-			bomberman.getJuego().disminuirPDestruible();
-			celdaActual.removePared();
+			if(celdaActual.removePared())
+				bomberman.getJuego().disminuirPDestruible();
 			if(bomberman.getJuego().gane()){
 				bomberman.getJuego().detenerTiempo();
+				System.out.println("Ganaste");
 				JOptionPane.showMessageDialog(null, "FELICIDADES, GANASTE");
 			}
 		}

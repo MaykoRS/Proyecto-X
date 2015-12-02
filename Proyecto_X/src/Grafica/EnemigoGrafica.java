@@ -8,7 +8,12 @@ package Grafica;
  * 
  */
 public abstract class EnemigoGrafica extends PersonajeGrafica{
-
+	/**
+	 * Crea un constructor con tres parámetros
+	 * @param velocidad representa la velocidad del PersonajeGrafica.
+	 * @param x representa la coordenada x de la posición en la que se encuentra.
+	 * @param y representa la coordenada y de la posición en la que se encuentra.
+	 */
 	protected EnemigoGrafica(int velocidad, int x, int y) {
 		super(velocidad, x, y);
 

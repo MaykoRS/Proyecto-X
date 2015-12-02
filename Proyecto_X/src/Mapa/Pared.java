@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import Grafica.ParedGrafica;
 import Personajes.*;
 
-/**
+/**Clase correspondiente a la implementación del módulo Pared
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
  * @author Escudero Johanna Valeria, Alumna de Universidad Nacional del Sur, LU 105868
  * @author Reyes Gastón Federico, Alumno de Universidad Nacional del Sur, LU: 106878
@@ -14,14 +14,23 @@ public abstract class Pared {
 	
 	protected Celda posicion;
 	protected int Puntaje;
-	
 	protected ParedGrafica grafico;
 	
+	
+	/**
+	 * Crea un constructor con un único parámetro.
+	 * @param pos Celda en donde se ubica el PowerUp
+	 */
 	protected Pared(Celda pos){
 		this.posicion = pos;
 		this.grafico = null;
 	}
 	
+	
+	/**
+	 * Comando abstracto que destruye la pared
+	 * @return
+	 */
 	public abstract boolean destruir();
 	
 	/**
@@ -40,9 +49,19 @@ public abstract class Pared {
 		this.posicion = c;
 	}
 	
-	
+	/**
+	 * Comando encargado de recibir al Bomberman
+	 * @param b Bomberman
+	 * @param dir dirección en la que quiere avanzar
+	 */
 	protected abstract void recibirBomberman(Bomberman b, int dir);
 	
+	
+	/**
+	 * Comando encargado de recibir al Enemigo
+	 * @param e Enemigo
+	 * @param dir dirección en la que quiere avanzar
+	 */
 	protected abstract void recibirEnemigo(Enemigo e, int dir);
 	
 	/**
@@ -53,6 +72,11 @@ public abstract class Pared {
 		return this.grafico.getGrafico();
 	}
 		
+	
+	/**
+	 * Consulta que retorna el valor del atributo Puntaje
+	 * @return Puntaje
+	 */
 	public int GetPuntaje()
 	{
 		return Puntaje;
