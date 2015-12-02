@@ -20,10 +20,9 @@ public abstract class Pared {
 	protected Pared(Celda pos){
 		this.posicion = pos;
 		this.grafico = null;
-		Puntaje=10;
 	}
 	
-	public abstract void destruir();
+	public abstract boolean destruir();
 	
 	/**
 	 * Devuelve la posición de la pared.

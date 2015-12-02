@@ -17,9 +17,9 @@ import Mapa.Celda;
 public class Bomberman extends Personaje{
 
 	private int MaxBomba;
-	private int alcanceBomba = 1;
+	private int alcanceBomba = 2;
 	private Juego Mijuego;
-	private boolean tirarBomba;
+	
 	
 	/**
 	 * Crea constructor con 2 parámetros.
@@ -28,10 +28,9 @@ public class Bomberman extends Personaje{
 	 */
 	public Bomberman(int velocidad, Celda pos,Juego j) {
 		super(velocidad,pos);
-		this.Mijuego = j;
+		Mijuego=j;
 		this.grafico = new BombermanGrafica(this.velocidad, this.posicion.getX(), this.posicion.getY());
 		this.modoDios = false;
-		tirarBomba=true;
 		MaxBomba=1;
 	}					
 	
@@ -39,9 +38,8 @@ public class Bomberman extends Personaje{
 	 * Crea consctructor con un parámetro.
 	 * @param pos Posición del Bomberman.
 	 */
-	public Bomberman(Celda pos, Juego j){
+	public Bomberman(Celda pos){
 		super(pos);
-		this.Mijuego = j;
 		
 		this.grafico = new BombermanGrafica(this.velocidad, this.posicion.getX(), this.posicion.getY());
 	}
@@ -205,11 +203,6 @@ public class Bomberman extends Personaje{
 	 */
 	public void setAlcanceBomba(int a){
 		 alcanceBomba = a;
-	}
-
-	public void setTirarBomba(boolean b) 
-	{
-		tirarBomba=b;
 	}
 	
 	public Juego getJuego()

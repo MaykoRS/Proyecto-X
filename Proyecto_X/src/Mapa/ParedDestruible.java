@@ -1,9 +1,6 @@
 package Mapa;
 
-import javax.swing.ImageIcon;
-
 import Grafica.PDestruibleGrafica;
-import Grafica.PIndestructibleGrafica;
 import Personajes.Bomberman;
 import Personajes.Enemigo;
 
@@ -16,16 +13,21 @@ public class ParedDestruible extends Pared {
 
 	public ParedDestruible(Celda pos) {
 		super(pos);
-
+		this.Puntaje = 10;
 		this.grafico = new PDestruibleGrafica(this.posicion.getX(), this.posicion.getY());
 	}
 
 	
 	//Deberia retornar un entero que representa la cantidad de putnso
-	public void destruir() 
+	public boolean destruir() 
 	{
-		
-		grafico.destruir();
+		this.getGrafico().setIcon(null);
+
+		if(this.posicion.getPowerUp() != null){
+			this.posicion.getGrafico().agregarPowerUP(this.posicion.getPowerUp());
+			
+		}
+		return true;
 		
 	}
 

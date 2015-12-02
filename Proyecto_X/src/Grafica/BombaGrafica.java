@@ -28,7 +28,7 @@ public class BombaGrafica {
 		exploto= false;
 		this.image = new Icon[2];
 		this.image[0] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomba.png"));
-		this.image[1] = new ImageIcon(this.getClass().getResource("/Bomberman/Explosion.png"));
+		this.image[1] = new ImageIcon(this.getClass().getResource("/Bomberman/Explosion.gif"));
 	    
 	}
 	

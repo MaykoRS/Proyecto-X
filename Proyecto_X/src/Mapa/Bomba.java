@@ -49,9 +49,7 @@ public class Bomba {
 
 	public void explotar()
 	{
-        this.grafico.explotar();
-        bomberman.setTirarBomba(true);
-       
+        this.grafico.explotar();       
 	}
 
     /**

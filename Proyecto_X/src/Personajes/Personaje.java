@@ -40,7 +40,6 @@ public abstract class Personaje {
 		this.posicion = pos;
 		this.grafico = null;
 		this.modoDios = false;
-		this.velocidad = 1;
 	}
 	
 	public Celda getPosicion(){

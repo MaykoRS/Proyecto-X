@@ -18,7 +18,7 @@ public class BombermanThread extends Thread {
 	private GUI gui;
 	private boolean detener = false;
 	
-	private static int velocidadEstandar = 800;
+	private static int velocidadEstandar = 1500;
 	private int velocidad;
 
 	public BombermanThread(Bomberman b, GUI gui) {
@@ -31,7 +31,7 @@ public class BombermanThread extends Thread {
 	public void run() {
 		while(!detener){
 			try {
-				Thread.sleep(velocidadEstandar / velocidad);
+				Thread.sleep(5);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} 

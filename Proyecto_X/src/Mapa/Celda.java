@@ -36,9 +36,7 @@ public class Celda {
 	protected int x,y;
 	
 	
-	public Celda(Mapa map, int x, int y)
-	{
-		
+	public Celda(Mapa map, int x, int y) {	
 		this.x=x;
 		this.y=y;
 		this.MiMapa = map;
@@ -150,13 +148,8 @@ public class Celda {
 	 */
 	public void removePared()
 	{
-		this.MiPared.getGrafico().setIcon(null);
-
-		if(MiPowerUp!=null){
-			this.grafico.agregarPowerUP(MiPowerUp);
-			
-		}
-		this.MiPared = null;
+		if(this.MiPared.destruir())
+			this.MiPared = null;
 	     
 	}
 	
@@ -232,9 +225,13 @@ public class Celda {
 	}
 
 	
+	public CeldaGrafica CeldaGrafica()
+	{
+		return grafico;
+	}
 	public void setPowerUp()
 	{
-		MiPowerUp = null;
+		MiPowerUp=null;
 		grafico.setGrafico();
 		
 		

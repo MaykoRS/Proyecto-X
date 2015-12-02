@@ -80,7 +80,7 @@ public class CeldaGrafica
 
 	public void setExplosion() 
 	{
-		grafico.setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/Explosion.png")));
+		grafico.setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/Explosion.gif")));
 		
 	}
 

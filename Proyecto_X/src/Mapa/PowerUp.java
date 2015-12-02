@@ -8,7 +8,7 @@ import Personajes.Bomberman;
 
 public abstract class PowerUp{
 	
-	
+	protected int cantidad;
 	protected boolean activa;
 	protected PowerUPGrafica MiGrafica;
 	protected Celda pos;
@@ -44,9 +44,6 @@ public abstract class PowerUp{
 	{
 		
 		return Puntaje;
-	}
-	public Celda getPosicion() {
-		return this.pos;
 	}
     
 }

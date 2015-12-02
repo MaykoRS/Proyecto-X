@@ -14,10 +14,10 @@ public class BombermanGrafica extends PersonajeGrafica {
 	public BombermanGrafica(int velocidad, int x, int y) {
 		super(velocidad, x, y);
 		
-		this.image[0] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomberman_up.png"));
-		this.image[1] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomberman_down.png"));
-		this.image[2] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomberman_left.png"));
-		this.image[3] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomberman_right.png"));
+		this.image[0] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomberman_up.gif"));
+		this.image[1] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomberman_down.gif"));
+		this.image[2] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomberman_left.gif"));
+		this.image[3] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomberman_right.gif"));
 		this.image[4] = new ImageIcon(this.getClass().getResource("/Bomberman/Bomberman_death.png"));
 	}
 	

@@ -17,6 +17,7 @@ public class Masacrality extends PowerUp {
      * @param B
      */
     public void afectarPersonaje(Bomberman B){
+       B.setModoDios(true);
 	   modificarMaxBombas(B);
 	   B.setModoDios(true);
 	   MasacralityThread hilo = new MasacralityThread(B);

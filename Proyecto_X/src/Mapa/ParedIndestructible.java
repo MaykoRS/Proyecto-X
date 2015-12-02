@@ -8,13 +8,13 @@ public class ParedIndestructible extends Pared {
 
 	public ParedIndestructible(Celda pos) {
 		super(pos);
-		
+		this.Puntaje = 0;
 		this.grafico = new PIndestructibleGrafica(this.posicion.getX(),this.posicion.getY());
 	}
 
 	@Override
-	public void destruir() {
-		// TODO Auto-generated method stub
+	public boolean destruir() {
+		return false;
 		
 	}
 
