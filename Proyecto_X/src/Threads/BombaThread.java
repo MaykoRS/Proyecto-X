@@ -106,6 +106,8 @@ public class BombaThread extends Thread {
 		Celda salida = celdaActual;
 		celdaActual.setGraficaExplosion();
 		
+		
+		
 		if(celdaActual.hayPared()){
 			bomberman.getJuego().incrementarPuntaje(celdaActual.getPared().GetPuntaje());
 			String g = Integer.toString(bomberman.getJuego().getPuntaje());
@@ -119,6 +121,7 @@ public class BombaThread extends Thread {
 			}
 		}
 			
+		
 		if(celdaActual.hayEnemigo()){
 			for(int i=0; i<celdaActual.getEnemigos().size(); i++){
 				Enemigo ene = celdaActual.getEnemigos().get(i);
@@ -136,6 +139,10 @@ public class BombaThread extends Thread {
 			{	bomberman.morir();
 			JOptionPane.showMessageDialog(null,"Bomberman ha sido afectado - GAME OVER");
 		}}
+		
+			
+		
+      
 			
 		return salida;
 	}
