@@ -1,14 +1,10 @@
 package Personajes;
 
 import java.awt.event.KeyEvent;
-
-import javax.swing.JOptionPane;
-
 import El_Juego.Juego;
 import Grafica.BombermanGrafica;
 import Mapa.Bomba;
 import Mapa.Celda;
-import Threads.MasacralityThread;
 
 /**
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
@@ -17,10 +13,10 @@ import Threads.MasacralityThread;
  */
 public class Bomberman extends Personaje{
 
-	private int MaxBomba;
+	private int cantMaxBombas;
 	private int alcanceBomba = 1;
 	private Juego Mijuego;
-	
+	private boolean tirarBomba;
 	
 	/**
 	 * Crea constructor con 2 parámetros.
@@ -29,10 +25,11 @@ public class Bomberman extends Personaje{
 	 */
 	public Bomberman(int velocidad, Celda pos,Juego j) {
 		super(velocidad,pos);
-		Mijuego=j;
+		Mijuego = j;
 		this.grafico = new BombermanGrafica(this.velocidad, this.posicion.getX(), this.posicion.getY());
 		this.modoDios = false;
-		MaxBomba = 1;
+		tirarBomba = true;
+		cantMaxBombas = 1;
 	}					
 	
 	/**
@@ -112,7 +109,7 @@ public class Bomberman extends Personaje{
 	 */
 	public int getVelocidad()
 	{
-		return velocidad;
+		return this.velocidad;
 	}
 	
 
@@ -133,17 +130,20 @@ public class Bomberman extends Personaje{
 		Bomba nueva = null ;
 		if(dir == KeyEvent.VK_SPACE) {
 			if (!soyDios()) {
+				
 				if (puedoTirarOtraBomba()) {
 					nueva = new Bomba(alcanceBomba,this.posicion,this);
 				    posicion.agregarBomba(nueva);
-				    MaxBomba--;
+				    cantMaxBombas--;
+				    
 			   	}
 			}
 			else {	
 				nueva = new Bomba(alcanceBomba,this.posicion,this);
 		        posicion.agregarBomba(nueva);
-		        MaxBomba--;
+		        cantMaxBombas--;
 		    }
+			
 	    }
 		 return nueva;
    	}
@@ -153,7 +153,7 @@ public class Bomberman extends Personaje{
 	 * @return Cantidad màxima de bombas.
 	 */
 	public int getMaxBombas(){
-        return this.MaxBomba;  
+        return this.cantMaxBombas;  
     }
 	
 
@@ -161,17 +161,17 @@ public class Bomberman extends Personaje{
 	 * Aumenta cantidad màxima de bombas.
 	 * @param m Cantidad a aumentar.
 	 */
-	public void aumentarMaxBombas(){
-    	this.MaxBomba ++;
+	public void setMaxBombas(){
+    	this.cantMaxBombas ++;
     }
 	
-	/**Devuelve el valor de verdad de si es posible o no tirar otra bomba
-	 * 
-	 * @return 
+	/**
+	 * Devuelve el valor de verdad de si es posible o no tirar otra bomba
+	 * @return True si en caso puedo tirar otra bomba.
 	 */
 	public boolean puedoTirarOtraBomba()
 	{
-		return MaxBomba>0;
+		return this.cantMaxBombas > 0;
 	}
 	 
 	/**
@@ -190,24 +190,37 @@ public class Bomberman extends Personaje{
 	public void setAlcanceBomba(int a){
 		 alcanceBomba = a;
 	}
+
+	/**
+	 * @param b boolean a anadir.
+	 */
+	public void setTirarBomba(boolean b) 
+	{
+		this.tirarBomba = b;
+	}
 	
+	/**
+	 * @return Mijuego a retornar.
+	 */
 	public Juego getJuego()
 	{
 		return Mijuego;
 	}
 
+	/**
+	 * Setea el modoDios del bomberman.
+	 */
 	public void cambiarSoyDios()
 	{
-		modoDios =! modoDios;
-		
+		modoDios=!modoDios;	
 	}
+	
+	/**
+	 * aumenta la bomba en uno ,usada para recuperar la bomba al tirarla.
+	 */
 	public void establecerBomba()
 	{
-		MaxBomba++;
-	}
-
-	public void setCantBombas(int cant) {
-		MaxBomba = cant;
 		
+		cantMaxBombas++;
 	}
 }

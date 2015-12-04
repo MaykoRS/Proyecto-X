@@ -1,10 +1,19 @@
 package El_Juego;
 
 import java.util.Random;
+
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import GUI.GUI;
 import Mapa.*;
 import Personajes.*;
-import PowerUps.*;
+import PowerUps.Bombality;
+import PowerUps.Fatality;
+import PowerUps.Masacrality;
+import PowerUps.PowerUp;
+import PowerUps.Speed_Up;
 import Threads.EnemigoThread;
 
 
@@ -17,7 +26,7 @@ import Threads.EnemigoThread;
  */
 public class Juego {
 
-	protected int puntaje;
+	protected volatile int puntaje;
 	protected static final int WIDTH = 13;
 	protected static final int HEIGHT = 31;
 	
@@ -40,12 +49,12 @@ public class Juego {
 	
 	
 	/**
-	 * Crea un constructor con un único parámetro
-	 * @param gui GUI
+	 * crea el juego con las paredes ,enemigos ,celdas trasitables.
+	 * @param gui GUI a anadir.
 	 */
 	public Juego(GUI gui){
 		this.MiGui = gui;
-		this.MiMapa = new Mapa(HEIGHT,WIDTH);
+		this.MiMapa = new Mapa(HEIGHT,WIDTH,this);
 		this.puntaje = 0;
 		this.detener = false;
 		this.gane = false;
@@ -118,7 +127,6 @@ public class Juego {
 		if(cantFatality>0)
 		{	Fatality f = new Fatality(c);
 			c.agregarPowerUp(f);
-			//MiGui.add(f.getGrafico(),2);
 			cantFatality--;
 		}
 		else
@@ -126,7 +134,6 @@ public class Juego {
 			if(cantMasacrality>0)
 			{	Masacrality m = new Masacrality(c);
 				c.agregarPowerUp(m);
-				//MiGui.add(m.getGrafico(),2);
 				cantMasacrality--;
 			}
 			else
@@ -134,7 +141,6 @@ public class Juego {
 				if(cantSpeedUp>0)
 				{	Speed_Up s = new Speed_Up(c);
 					c.agregarPowerUp(s);
-					//MiGui.add(s.getGrafico(),2);
 					cantSpeedUp--;
 				}
 				else
@@ -142,7 +148,6 @@ public class Juego {
 					if(cantBombality>0) {
 						Bombality b = new Bombality(c);
 						c.agregarPowerUp(b);
-						//MiGui.add(b.getGrafico(),2);
 						cantBombality--;
 					}
 				}
@@ -241,6 +246,8 @@ public class Juego {
 		}
 	}
 	
+	
+	
 	/**
 	 * Detiene los hilos para cada uno de los enemigos.
 	 */
@@ -268,36 +275,33 @@ public class Juego {
 	}
 
 	/**
-	 * Retorna el valor del atributo MiGui
-	 * @return MiGui
+	 * @return Gui a retornar.
 	 */
 	public GUI getGui() {
 		return MiGui;
 	}
 	
 	/**
-	 * Retorna el valor del atributo puntaje
-	 * @return puntaje
+	 * @return puntaje a retornar.
 	 */
 	public int getPuntaje() {
 		return puntaje;
 	}
-	
+
 	/**
-	 * Metodo encargado de disminuir la cantidad de 
-	 * paredes destruibles
+	 * disminuye las cantidad de paredes destruibles
 	 */
 	public void disminuirPDestruible() {
 		this.cantPDestruibles-- ;
 		if(cantPDestruibles == 0){
 			gane = true;
 			this.detenerTiempo();
+			this.gane();
 		}
 	}
 	
 	/**
-	 * Comando  encargado de detener el tiempo
-	 * y cortar el hilo de los enemigos.
+	 * Detiene el tiempo transcurrido.
 	 */
 	public void detenerTiempo() {
 		this.detener = true;
@@ -310,19 +314,27 @@ public class Juego {
 	}
 	
 	/**
-	 * Retorna el valor de verdad del atributo detener
-	 * @return detener
+	 * @return detener a retornar.
 	 */
 	public boolean detener(){
 		return this.detener;
 	}
-	/**
-	 * Retorna el valor de verdad del atributo gane
-	 * @return gane
-	 */
 	
-	public boolean gane(){
-		return this.gane;
+	/**
+	 * Muestra un aviso en caso de ganar el juego.
+	 */
+	public void  gane(){
+		if(gane)
+		JOptionPane.showMessageDialog(null, "FELICIDADES, GANASTE");
 	}
+	/**
+	 * Muestra un aviso en caso de perder.
+	 */
+	public void Perdi()
+	{
+		JOptionPane.showMessageDialog(null,"Bomberman ha sido afectado - GAME OVER");
+	}
+
+	
 	
 }

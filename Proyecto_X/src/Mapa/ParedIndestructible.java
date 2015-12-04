@@ -8,17 +8,22 @@ public class ParedIndestructible extends Pared {
 
 	public ParedIndestructible(Celda pos) {
 		super(pos);
-		this.Puntaje = 0;
+		Puntaje=0;
+		
 		this.grafico = new PIndestructibleGrafica(this.posicion.getX(),this.posicion.getY());
 	}
 
 	@Override
-	public boolean destruir() {
-		return false;
+	public void destruir() {
 		
 	}
-
-
+	
+	@Override
+	public void setGrafico1()
+	{
+		
+	}
+    
 	@Override
 	public void recibirBomberman(Bomberman b, int n) {
 		// TODO Auto-generated method stub

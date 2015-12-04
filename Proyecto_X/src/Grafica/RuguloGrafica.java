@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
  * Clase correspondiente a la implementación de la parte gráfica del Enemigo Rugulo.
  */
 public class RuguloGrafica extends EnemigoGrafica {
+
 	/**
 	 * Crea un constructor de tres parámetros.
 	 * @param velocidad representa la velocidad del EnemigoGrafica.

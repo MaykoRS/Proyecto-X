@@ -1,4 +1,4 @@
-package GUI;
+ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import El_Juego.Juego;
 import Threads.BombermanThread;
+import Threads.PuntajeThread;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -30,6 +31,7 @@ public class GUI extends JFrame {
 	
 	private Juego j;
 	private BombermanThread tiempo;
+	private PuntajeThread PuntajeHilo;
 	private volatile boolean lock = false;
 	private int direction = -1;
 	
@@ -83,11 +85,16 @@ public class GUI extends JFrame {
 				
 		j = new Juego(this);
 		tiempo = new BombermanThread(j.getBomberman(), this);
+		PuntajeHilo= new PuntajeThread(this,j);
 		tiempo.start();
+		PuntajeHilo.start();
 		j.empezar();
 		
 	}
 	
+	/**
+	 * @param key evento a anadir.
+	 */
 	protected void mover(KeyEvent key) {
 		if(!lock) {
 			direction = key.getKeyCode();
@@ -95,28 +102,47 @@ public class GUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * @return lock a retornar.
+	 */
 	public boolean getLock() {
 		return this.lock;
 	}
 	
+	/**
+	 * Modifica la variable lock.
+	 */
 	public void toggleLock() {
 		this.lock = !this.lock;
 	}
 	
 	
+	/**
+	 * @return direccion a retornar.
+	 */
 	public int getDirection() {
 		return this.direction;
 	}
 	
+	/**
+	 * @param g string a anadir.
+	 */
 	public void setPuntaje(String g) {
-		labelPuntaje.setText("Puntaje: "+" "+g);
+		labelPuntaje.setText("Puntaje :"+" "+g);
 	}
 	
+	/**
+	 * @param m minutos a anadir.
+	 * @param s segundos a anadir.
+	 */
 	public void setTiempo(int m, int s){
 		labelTiempo.setText("Tiempo: 00:" + String.format("%02d", m) + ":" + String.format("%02d", s));
 	}
 	
 	
+	/**
+	 * crea el panel inferior del juego.
+	 */
 	public void armarPanelInferior() {
 		inferior.setSize(new Dimension(992, 52));
 		inferior.setBackground(Color.LIGHT_GRAY);

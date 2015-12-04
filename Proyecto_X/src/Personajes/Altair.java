@@ -51,6 +51,7 @@ public class Altair extends Enemigo {
 		getGrafico().setIcon(null);
 	}
 
+	
 	public void mover() {
 		Random r = new Random();
 		

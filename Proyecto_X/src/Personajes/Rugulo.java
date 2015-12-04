@@ -12,6 +12,10 @@ import Mapa.Celda;
  */
 public class Rugulo extends Enemigo {
 
+	/**
+	 * crea un enemigo en una celda pos.
+	 * @param pos celda a anadir.
+	 */
 	public Rugulo(Celda pos){
 		super(pos);
 		

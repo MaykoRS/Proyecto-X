@@ -14,6 +14,11 @@ public class Sirius extends Enemigo {
     
 	protected Juego Mijuego;
 	
+	/**
+	 * crea un enemigo con un puntaje establecido.
+	 * @param pos celda a anadir.
+	 * @param j juego a anadir.
+	 */
 	public Sirius(Celda pos, Juego j)
 	{
 		super(pos);

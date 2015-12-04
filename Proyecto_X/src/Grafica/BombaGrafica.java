@@ -20,10 +20,10 @@ public class BombaGrafica {
 	protected boolean exploto;
 	protected JLabel grafico;
 	protected Icon [] image;
-    protected Point pos;
 	
-    
-    /**
+	protected Point pos;
+	
+	/**
 	 * Crea un constructor con dos parámetros que representa la posición de la Bomba
 	 * @param x coordenada x de la posición en la que se encuentra
 	 * @param y coordenada y de la posición en la que se encuentra
@@ -56,21 +56,24 @@ public class BombaGrafica {
 			this.grafico.setIcon(image[1]);
 			this.grafico.setBounds(this.pos.x, this.pos.y, width, height);
 		    exploto=true;  
-			}
-	return this.grafico;
+		
 		}
+	
+		return this.grafico;
+	 
+	}
 	
 	
 		
-	/**
-	 * Consulta que retorna el valor de verdad del atributo exploto
-	 * @return exploto
-	 */
 	
+	/**
+	 * @return exploto a retornar.
+	 */
 	public boolean getExploto()
 	{
 		return exploto;
 	}
+	
 	/** Devuelve el JLabel de Bomba.
 	 * @return JLabel a retornar.
 	 */

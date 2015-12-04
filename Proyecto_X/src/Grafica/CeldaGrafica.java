@@ -2,13 +2,13 @@ package Grafica;
 
 import java.awt.Point;
 
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Mapa.Bomba;
 import PowerUps.PowerUp;
+
 /**
  *  Clase correspondiente a la implementación de la parte gráfica de la Celda. 
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
@@ -25,7 +25,7 @@ public class CeldaGrafica
 	protected Icon image,image2;
 	protected Point pos;
 	protected Bomba b;
-
+	
 	/**
 	 * Crea un constructor con dos parámetros
 	 * @param x corresponde a la coordenada x de su posición.
@@ -37,6 +37,7 @@ public class CeldaGrafica
 		this.image = new ImageIcon(this.getClass().getResource("/Bomberman/celdaTransitable.png"));
 	    b=null;
 	}
+
 	/**
 	 * Consulta que retorna el atributo grafico
 	 * @return grafico 
@@ -56,6 +57,7 @@ public class CeldaGrafica
 			
 		return this.grafico;
 	}
+
 	/**
 	 * Método encargado de agregar una bomba a la celda.
 	 * @param b  Bomba que recibe por parametro.
@@ -67,8 +69,17 @@ public class CeldaGrafica
 		
 		
 	}
- 
-	 
+
+	public void destruir() 
+	{
+		 
+		if(graficoP != null){
+			this.grafico = graficoP.getGrafico();
+		}
+		
+		
+	}
+	
 	/**
 	 * Comando que setea el atributo grafico	
 	 * @param j JLabel
@@ -84,6 +95,7 @@ public class CeldaGrafica
 	 */
 	public void agregarPowerUP(PowerUp p)
 	{
+		grafico.setIcon(null);
 		grafico.setIcon(p.getIcon());
 	}
 	
@@ -93,16 +105,20 @@ public class CeldaGrafica
 	public void setGrafico() 
 	{
 		
+		
 		grafico.setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/celdaTransitable.png")));
+		
 		
 		
 	}
 
+	
 	/**
-	 * Comando encargado de setear la imagen de la explosión.
+	 * Setea el grafico de la explosion a la celda.
 	 */
 	public void setExplosion() 
 	{
+		
 		grafico.setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/Explosion.gif")));
 		
 	}

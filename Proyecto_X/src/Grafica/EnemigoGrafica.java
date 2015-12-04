@@ -8,6 +8,7 @@ package Grafica;
  * 
  */
 public abstract class EnemigoGrafica extends PersonajeGrafica{
+
 	/**
 	 * Crea un constructor con tres parámetros
 	 * @param velocidad representa la velocidad del PersonajeGrafica.

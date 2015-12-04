@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
  *
  */
 public class BombermanGrafica extends PersonajeGrafica {
+
 	/**
 	 * Crea un constructor con tres parametros
 	 * @param velocidad representa la velocidad del PersonajeGrafica.

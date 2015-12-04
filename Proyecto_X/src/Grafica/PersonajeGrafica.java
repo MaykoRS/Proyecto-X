@@ -22,6 +22,7 @@ public abstract class PersonajeGrafica {
 	
 	protected int velocidad;
 	protected Point pos;
+	
 	/**
 	 * Crea un constructor de tres parámetros.
 	 * @param velocidad entero que representa la velocidad del grafico.

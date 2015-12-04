@@ -1,9 +1,19 @@
 package Mapa;
 
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import El_Juego.Juego;
+import Grafica.BombaGrafica;
 import Grafica.CeldaGrafica;
+import Grafica.PDestruibleGrafica;
 import Personajes.*;
 import PowerUps.PowerUp;
 
@@ -27,6 +37,7 @@ public class Celda {
 	protected Bomba MiBomba;
 	protected CeldaGrafica grafico;
 	protected int x,y;
+	protected Juego juego;
 	
 	/**
 	 * Crea un constructor con tres parámetros.
@@ -34,7 +45,9 @@ public class Celda {
 	 * @param x coordenada x de su ubicación
 	 * @param y coordenada y de su ubicación
 	 */
-	public Celda(Mapa map, int x, int y) {	
+	public Celda(Mapa map, int x, int y, Juego j)
+	{
+		this.juego = j;
 		this.x=x;
 		this.y=y;
 		this.MiMapa = map;
@@ -121,7 +134,7 @@ public class Celda {
 	 */
 	public void removeEnemigo(Enemigo e){
 		this.MisEnemigos.remove(e);
-		
+		//grafico.setGrafico();
 	}
 
 	
@@ -149,18 +162,14 @@ public class Celda {
 		this.MiPared = p;
 	}
 	
-	
 	/**
-	 * Retorna true si y sólo si logra remover la pared.
-	 * @return True si y sólo si logra remover la pared.
+	 * Elimina Pared.
+	 * @param p Pared a eliminar.
 	 */
-	public boolean removePared()
-	{	
-		boolean destrui = this.MiPared.destruir();
-		if(destrui)
-			this.MiPared = null;
+	public void removePared()
+	{		
+		MiPared.setGrafico1();
 		
-		return destrui;
 	}
 	
 	/**
@@ -181,7 +190,6 @@ public class Celda {
 	public boolean contactoConEnemigo(Bomberman b){
 		return this.hayEnemigo();
 	}
-	
 	
 	/**
 	 * Comando encargado de decidir si el Bomberman puede avanzar en la dirección
@@ -204,7 +212,6 @@ public class Celda {
 	 * @param e Enemigo 
 	 * @param dir dirección en la que desea avanzar
 	 */
-	
 	public void dejarPasar(Enemigo e, int dir){
 		if(this.hayPared()){
 			this.MiPared.recibirEnemigo(e,dir);
@@ -245,7 +252,6 @@ public class Celda {
 	 * Consulta que retorna el valor del atributo y
 	 * @return y
 	 */
-	
 	public int getY(){
 		return this.y;
 	}
@@ -274,16 +280,25 @@ public class Celda {
 		return this.MiBomba;
 	}
 	
+	
 	/**
 	 * Consulta que retorna el atributo grafico
 	 * @return  grafico
 	 */
-	
 	public CeldaGrafica getGrafico()
 	{
 		return grafico;
 	}
 
+	
+	/**
+	 * @return grafica de la celda.
+	 */
+	public CeldaGrafica CeldaGrafica()
+	{
+		return grafico;
+	}
+	
 	/**
 	 * Comando encargado de setear el valor del PowerUp a nulo
 	 */
@@ -291,14 +306,83 @@ public class Celda {
 	{
 		MiPowerUp=null;
 		grafico.setGrafico();
+		
+		
 	}
 	
+
 	/**
 	 * Comando encargado de setear la explosión
 	 */
 	public void setGraficaExplosion() 
 	{
 		grafico.setExplosion();
+		
+	}
+	
+	/**
+	 * @return puntaje de la celda.
+	 */
+	public int  explotar() 
+	{
+		
+		int cantPuntaje=0;
+		
+		
+		if(hayEnemigo())
+			for(int i=0; i<MisEnemigos.size(); i++)
+				{
+				    cantPuntaje += MisEnemigos.get(i).getPuntosPorMuerte();
+					MisEnemigos.get(i).morir();
+					removeEnemigo(MisEnemigos.get(i));
+				}
+				
+		if(MiBomberman!=null)
+		{		if(!(MiBomberman.soyDios()))
+				{	
+					MiBomberman.morir();
+					MiBomberman.getJuego().Perdi();
+				}
+				
+		}
+		
+				
+		if(MiPared!=null)
+		{
+			cantPuntaje += MiPared.getPuntaje();
+			removePared();
+		     
+		}
+		else
+		if(MiPared==null)
+		{
+			
+			grafico.setExplosion();
+		}
+
+		
+			
+		return cantPuntaje;
+	}
+	
+	/**
+	 * Setea el grafico de la celda.
+	 */
+	public void setGraficos()
+	{ 
+		if(MiPared != null && MiPared.getPuntaje()>0)
+		{	
+			MiPared.destruir();
+		 	MiPared=null;
+		 	this.juego.disminuirPDestruible();
+
+		}
+		
+		if(MiPowerUp != null)
+			this.grafico.agregarPowerUP(MiPowerUp);
+		else
+		    grafico.setGrafico();
+		
 		
 	}
 	

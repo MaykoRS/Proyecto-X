@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
  *  
  */
 public class PIndestructibleGrafica extends ParedGrafica {
+
 	/**
 	 * Crea un constructor de dos parámetros.
 	 * @param x representa la coordenada x de su posición.

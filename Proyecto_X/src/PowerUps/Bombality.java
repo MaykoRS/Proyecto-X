@@ -18,8 +18,9 @@ public class Bombality extends PowerUp {
     }
  
     
+    
     public void afectarPersonaje(Bomberman B){
-        B.aumentarMaxBombas();
+        B.setMaxBombas();
     }
 
 }

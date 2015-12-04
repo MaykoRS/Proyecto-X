@@ -17,10 +17,9 @@ public class BombermanThread extends Thread {
 	private Bomberman bomberman;
 	private GUI gui;
 	private boolean detener = false;
-	
 	private static int velocidadEstandar = 600;
 	private int velocidad;
-
+    
 	public BombermanThread(Bomberman b, GUI gui) {
 		this.bomberman = b;
 		this.gui = gui;
@@ -31,7 +30,7 @@ public class BombermanThread extends Thread {
 	public void run() {
 		while(!detener){
 			try {
-				Thread.sleep(velocidadEstandar / velocidad);
+				Thread.sleep(velocidadEstandar/velocidad);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} 
@@ -41,6 +40,7 @@ public class BombermanThread extends Thread {
 			
 			if(gui.getLock()){
 				if(direccionValida()){
+				
 					this.bomberman.mover(gui.getDirection());
 					if(bomberman.getPosicion().hayPowerUp())
 					{
@@ -95,6 +95,9 @@ public class BombermanThread extends Thread {
 		this.bomberman.morir();
 	}
 	
+	/**
+	 * @return verdadero si la direccion es valida o falso en caso contrario.
+	 */
 	private boolean direccionValida(){
 		return gui.getDirection() >= 37 && gui.getDirection() <= 40;
 	}

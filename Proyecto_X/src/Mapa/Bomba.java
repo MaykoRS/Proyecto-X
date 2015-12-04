@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 import El_Juego.Tiempo;
 import Grafica.BombaGrafica;
 import Personajes.Bomberman;
-import Threads.BombaThread;
+import Threads.BombaTread;
 
 /**
  * Clase correspondiente a la Implementacion del módulo Bomba. 
@@ -38,13 +38,13 @@ public class Bomba {
     	this.nivelDeImpacto = ni;
     	this.grafico = new BombaGrafica(this.posicion.getX(), this.posicion.getY());
 	}
+	
 	/**
 	 * Crea un constructor con 3 parámetros.
 	 * @param aB representa el nivel de impacto de las bombas.
 	 * @param pos Posición donde se ubica inicialmente.
 	 * @param b Boomberman
 	 */
-	
 	public Bomba(int aB, Celda pos, Bomberman b) {
 		this.bomberman = b;
 		this.estadoActiva = true;
@@ -52,12 +52,15 @@ public class Bomba {
     	this.nivelDeImpacto = aB;
     	this.grafico = new BombaGrafica(this.posicion.getX(), this.posicion.getY());
 	}
+
 	/**
 	 * Método encargado de la explosión de la Bomba.
 	 */
 	public void explotar()
 	{
-        this.grafico.explotar();       
+        this.grafico.explotar();
+        bomberman.setTirarBomba(true);
+       
 	}
 
     /**
@@ -81,8 +84,10 @@ public class Bomba {
      */
     public void esperarParaExplotar()
     {   
-    	BombaThread cb = new BombaThread(this.bomberman,this,3000);
+    	BombaTread cb = new BombaTread(this.bomberman,this,3000);
 		cb.start();
+		
+    	//new ContadorBomba(bomberman,0).start();
     }
     
     /**
@@ -100,7 +105,7 @@ public class Bomba {
     public Bomba clone()
     {
         Bomba B = new Bomba(nivelDeImpacto,posicion,tiempoTirada);
-        return B;
+        return B; //modificar 
     }
 
     /**
@@ -110,10 +115,16 @@ public class Bomba {
     public void setPosicion(Celda p){
         posicion = p;
     }
+
+    /**
+     * @return tiempo en que la bomba se tiro.
+     */
+    public Tiempo getTiempoTirada(){
+        return this.tiempoTirada;
+    }
     
     /**
-     * Retorna el JLabel del atributo grafico 
-     * @return grafico
+     * @return JLabel de la bomba.
      */
     public JLabel getGrafico(){
 		return this.grafico.getGrafico();

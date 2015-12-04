@@ -13,6 +13,10 @@ public abstract class Enemigo extends Personaje{
 
 	protected int puntosPorMuerte;
 	
+	/**
+	 * crea un enemigo en una celda pos ,con un puntaje establecido.
+	 * @param pos celda a anadir.
+	 */
 	protected Enemigo(Celda pos) {
 		
 		super(pos);
@@ -20,6 +24,11 @@ public abstract class Enemigo extends Personaje{
 	
 	}
 	
+	
+	/**
+	 * @param velocidad a anadir.
+	 * @param pos celda a anadir.
+	 */
 	protected Enemigo(int velocidad, Celda pos){
 		super(velocidad,pos);
 		puntosPorMuerte=20;
@@ -41,6 +50,9 @@ public abstract class Enemigo extends Personaje{
 	}
 	
 
+	/**
+	 * @return puntosPorMuerte del enemigo.
+	 */
 	public int getPuntosPorMuerte() {
 		// TODO Auto-generated method stub
 		return this.puntosPorMuerte;

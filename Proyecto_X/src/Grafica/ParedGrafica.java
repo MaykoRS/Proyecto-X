@@ -3,10 +3,11 @@ package Grafica;
 import java.awt.Point;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Clase correspondiente a la implementación de la parte gráfica de la clase Pared.
+ * Clase correspondiente a la implementación de la parte gráfica de la clase pared.
  * @author Rodríguez Samana Mayko , Alumno de Universidad Nacional del Sur, LU 109130
  * @author Escudero Johanna Valeria, Alumna de Universidad Nacional del Sur, LU 105868
  * @author Reyes Gastón Federico, Alumno de Universidad Nacional del Sur, LU: 106878
@@ -15,8 +16,10 @@ import javax.swing.JLabel;
 public abstract class ParedGrafica {
 	protected final int width = 32;
 	protected final int height = 32;
+	
 	protected JLabel grafico;
 	protected Icon image;
+	//protected Icon image2;
 	protected Point pos;
 	
 	/**
@@ -49,4 +52,23 @@ public abstract class ParedGrafica {
 		return this.grafico;
 	}
 
+	/**
+	 * destruye el grafico de la celda.
+	 */
+	public void destruir() 
+	{       
+        grafico.setIcon(null);
+		grafico.setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/celdaTransitable.png")));
+		
+	}
+	/**
+	 * setea el grafico de la explosion ala pared.
+	 */
+	public void  getGrafico1()
+	{
+		
+		 grafico.setIcon(new ImageIcon(this.getClass().getResource("/Bomberman/Explosion.gif")));
+		 
+		 
+	}
 }
