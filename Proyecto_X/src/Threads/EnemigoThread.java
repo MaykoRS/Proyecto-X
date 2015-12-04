@@ -16,7 +16,7 @@ public class EnemigoThread extends Thread{
 	private static int velocidadEstandar = 1500;
 	private int velocidad;
 	private volatile boolean eDetener;
-	public EnemigoThread(Enemigo e, GUI gui){
+	public EnemigoThread(Enemigo e){
 		this.enemigo = e;
 		this.eDetener = false;
 		this.velocidad = e.getVelocidad();

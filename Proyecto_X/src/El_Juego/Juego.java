@@ -183,7 +183,7 @@ public class Juego {
 						g.add(e.getGrafico(),0);
 					}
 					MisEnemigos[i] = e;
-					EnemigoHilo[i] = new EnemigoThread(e,g); 
+					EnemigoHilo[i] = new EnemigoThread(e); 
 					i++;
 				}
 			} catch (Exception e2) {
@@ -191,9 +191,9 @@ public class Juego {
 			}
 		}
 		cel = this.MiMapa.getCelda(29,11);
-		e = new Sirius (5,cel,this);
+		e = new Sirius (3,cel,this);
 		MisEnemigos[5] = e;
-		EnemigoHilo[5] = new EnemigoThread(e,g);
+		EnemigoHilo[5] = new EnemigoThread(e);
 		g.add(e.getGrafico(),0);
 	}
 	
