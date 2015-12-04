@@ -2,45 +2,16 @@ package Threads;
 
 
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import GUI.GUI;
 import Mapa.Bomba;
 import Mapa.Celda;
-import Mapa.Pared;
-import Mapa.ParedIndestructible;
-import Mapa.ParedDestruible;
 import Personajes.Bomberman;
-import Personajes.Enemigo;
 
-
-
-
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import GUI.GUI;
-import Mapa.Bomba;
-import Mapa.Celda;
-import Mapa.Pared;
-import Mapa.ParedIndestructible;
-import Mapa.ParedDestruible;
-import Personajes.Bomberman;
-import Personajes.Enemigo;
 
 public class BombaTread extends Thread {
 	
 	private Bomberman bomberman;
 	private Bomba bomba;
 	private int tiempo;
-	private boolean detener = false;
-    private String cadenaPuntaje="";
 	
 	public BombaTread(Bomberman B, Bomba b, int t){
 		this.bomberman = B;
@@ -108,9 +79,6 @@ public class BombaTread extends Thread {
 
 	public void detener() {
 		this.interrupt();
-		
-		// Seteamos el flag para detener su ejecución.
-		this.detener = true;
 	}
 	
 	

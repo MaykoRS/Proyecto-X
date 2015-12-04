@@ -1,4 +1,5 @@
 package Personajes;
+
 import java.util.Random; 
 
 import El_Juego.Juego;

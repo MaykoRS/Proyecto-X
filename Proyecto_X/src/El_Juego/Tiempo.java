@@ -1,7 +1,6 @@
 package El_Juego;
 
 import GUI.GUI;
-import Personajes.Bomberman;
 
 /**
  *  Clase correpondiente a la implementación del módulo Tiempo. 

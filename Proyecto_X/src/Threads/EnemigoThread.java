@@ -16,15 +16,13 @@ public class EnemigoThread extends Thread{
 	private static int velocidadEstandar = 1500;
 	private int velocidad;
 	private volatile boolean eDetener;
-	private GUI gui;
-	
 	public EnemigoThread(Enemigo e, GUI gui){
-		this.gui = gui;
 		this.enemigo = e;
 		this.eDetener = false;
 		this.velocidad = e.getVelocidad();
 	}
 	
+	@SuppressWarnings("static-access")
 	@Override
 	public void run() {
 		// Ejecuto indefinidamente hasta que el flag sea verdadero.

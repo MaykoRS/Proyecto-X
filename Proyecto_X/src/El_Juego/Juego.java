@@ -1,9 +1,6 @@
 package El_Juego;
 
 import java.util.Random;
-
-
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import GUI.GUI;

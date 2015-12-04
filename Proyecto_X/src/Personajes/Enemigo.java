@@ -1,7 +1,5 @@
 package Personajes;
 
-import java.util.Random;
-
 import Mapa.Celda;
 
 /**
