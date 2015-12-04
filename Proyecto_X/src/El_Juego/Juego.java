@@ -331,8 +331,10 @@ public class Juego {
 	 * Muestra un aviso en caso de perder.
 	 */
 	public void Perdi()
-	{
-		JOptionPane.showMessageDialog(null,"Bomberman ha sido afectado - GAME OVER");
+	{	
+		if(this.MiBomberman != null)
+			JOptionPane.showMessageDialog(null,"Bomberman ha sido afectado - GAME OVER");
+		
 	}
 
 	

@@ -342,6 +342,7 @@ public class Celda {
 				{	
 					MiBomberman.morir();
 					MiBomberman.getJuego().Perdi();
+					MiBomberman = null;
 				}
 				
 		}
